@@ -1,14 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(void)
+int main()
 {
   int sum = 0;
-  int br[8];
-  printf("Please enter a number: ");
-  scanf("%i", br);
-  printf("%i", br);
+  char rawnum[10], br[10], *token;
+  printf("\nPlease enter a number: ");
+  scanf("%s", br);
+  fflush(stdin);
+  printf("%s\n", br);
 
-  for(int i; i < 9; i++) {
+  token = strstr(br, "-");
+  strncpy(rawnum, br, (int)token);
+  //strncat(rawnum, br+4, 7);
+  //strncat(rawnum, br+);
+  printf("%s\n", rawnum);
+
+  /*for(int i; i < 9; i++) {
     if((i != 3) || (i != 7)) {
       if((i % 2) == 0) {
         sum = sum  + (br[i] * 1);
@@ -17,8 +25,9 @@ int main(void)
         sum = sum + (br[i] * 2);
       }
     }
-  }
+  }*/
   printf("%i", sum);
+  main();
   return(0);
 }
 
