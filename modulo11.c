@@ -10,7 +10,9 @@ int main() {
   length = strlen(input);
 
   for(length, j = 2; j <= 7, length >= 1; length--, j++) {
-        currentNumber = (int)input[length-1] - '0';
+        currentNumber = (int)input[length-1] - '0';        
+        //(int)input[index] points to ascii value of input, since input was scanned as a char array
+        //to fix this, subtract the int value of '0' (48) from the read integer ascii values
         sum = sum + (currentNumber * j);
         if(j == 7)   j=1;
   }
