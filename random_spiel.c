@@ -3,7 +3,7 @@
 
 
 int main(void) {
-  int  numinput, top = 1000, bot = 1, num, rannum, namenum = 0;
+  int  numinput, top = 1000, bot = 1, num, rannum, namenum = 0, tries = 0;
   char names[2][24];
 
   printf("Enter first name: ");
@@ -25,12 +25,18 @@ int main(void) {
   rannum = rand() % 1000 + 1;
   printf("%d\n", rannum);
   while(rannum != numinput) {
-    printf("\n%s enter a number between %d and %d: ", names[namenum], top, bot);
-    if(namenum == 0)  namenum = 1;
-    if(namenum == 1)  namenum = 0;
+    printf("\n%s enter a number between %d and %d: ", names[namenum], bot, top);
+    switch(namenum) {
+      case 0:
+        namenum = 1;
+      case 1:
+        namenum = 0;
+    }
     scanf("%d", &numinput);
     if(numinput < rannum) bot = numinput;
     else  top = numinput;
+    tries++;
   }
-  printf("Good job.");
+  printf("Good job, %s won.\n", names[namenum]);
+  printf("No. of tries: %d", tries);
 }
