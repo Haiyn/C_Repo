@@ -2,17 +2,17 @@
 #include <string.h>
 #include <stdlib.h>
 
-//Liste als neuer Typ
-typedef struct m_card {         // m_card ist ein Muster, benötigt für die Adresspointer
+// list as a new type for list entries
+typedef struct m_card {
   char characterName[20+1];
   char cardName[20+1];
   int damageNumber;
 
-  struct m_card *before;         // Adresspointer für vorherigen Listeneintrag
-  struct m_card *after;          // Adresspointer für nächsten Listeneintrag
+  struct m_card *before;         // address pointer for previous entry
+  struct m_card *after;          // address pointer for following enry
 } t_card;
 
-//Liste als neuer Typ ohne Zeiger --> zum Einlesen
+// list as a new type without entry pointers (for reading data)
 typedef struct {
   char characterName[20+1];
   char cardName[30+1];
@@ -30,12 +30,12 @@ void debug();
 
 int main() {
 
-  t_field field;                    // Lokale Pointer
+  t_field field;                    // local pointers
   t_field *f = &field;
   f -> mom = 0;
   f -> start = 0;
   f -> last = 0;
-  //Lese 3 Datensätze ein
+  // read 3 data sets
   int i;
   for(i = 0; i < 3; i++) {
     char input[3+1];
@@ -50,8 +50,8 @@ int main() {
 }
 
 void list_add(t_field *f) {
-  f -> mom = (t_card*)malloc(sizeof(t_card));          // Reserviert Größe des structs im Hauptspeicher, Typecast nötig, da return value von malloc Void-Zeiger ist
-  add_entry(f);                                    // Kopiert eingelesenes in die Liste
+  f -> mom = (t_card*)malloc(sizeof(t_card));      // reserves the size of the strucht in main memeory, typecast needed because malloc's return value is a void pointer
+  add_entry(f);                                    // copies read element to the list
   f -> mom -> before = f -> last;
   f -> mom -> after = 0;
   if(f -> last == 0)  f -> start = f -> mom;
