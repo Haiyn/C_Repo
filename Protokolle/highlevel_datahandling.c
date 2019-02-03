@@ -20,3 +20,18 @@ int main (void) {
   }
   //return 0;
 }
+/*void debug(t_field *f) {
+  f -> mom = f -> start;
+  while (f -> mom) {
+    printf("%-20s %s %s %d %X %X %X\n",
+                  f -> mom -> characterName,
+                  f -> mom -> cardName,
+                  f -> mom -> cardType,
+                  f -> mom -> damageNumber,
+                  f -> mom,
+                  f -> mom -> before,
+                  f-> mom -> after);
+    f -> mom = f -> mom -> after;
+  }
+  return;
+}*/

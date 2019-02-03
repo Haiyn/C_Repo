@@ -1,0 +1,3 @@
+Ironclad/Strike/Attack/6/none
+Ironclad/Bash/Attack/8/Vulnerable
+Ironclad/Pommel Strike/3x4/none
