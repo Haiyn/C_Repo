@@ -13,15 +13,32 @@ bool checkInputSelection(int lowerBoundary, int upperBoundary, int input) {
 
 // Makes the sub-routine wait until user inputs a '1'
 void waitForExit() {
-  int num;
+  char num[1];
   printf("\n\nTo exit the sub-routine, enter '1': ");
   do
-    scanf("%d\n", &num);
-  while(num != 1);
+    scanf(" %[^ \n]", num);
+  while(num[0] != '1');
+  return;
 }
 
-// TIME MEASURING
-// Measures passed time
+// Asks the user if he wants to run the sub-routine again. Return
+bool retry() {
+  char retrySelection[1];
+  scanf(" %[^\n]", retrySelection);
+  if(retrySelection[0] == 'y')  return true;
+  else {
+    return false;
+  }
+}
+
+// FILE VALIDATION
+bool validateFile(FILE *fp, char functionName[30]) {
+  if(!fp) {
+    printf("\n###ERR at %s: Could not find file.", functionName);
+    return false;
+  }
+  return true;
+}
 
 
 // STRING MANIPULATION

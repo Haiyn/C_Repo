@@ -1,3 +1,11 @@
 Ironclad/Strike/Attack/6/none
 Ironclad/Bash/Attack/8/Vulnerable
-Ironclad/Pommel Strike/3x4/none
+Ironclad/Pommel Strike/Attack/3x4/none
+Silent/Caltrops/Power/0/Thorns
+Silent/Footwork/Power/0/Dexterity
+Ironclad/Rupture/Power/0/Card
+Ironclad/Perfected Strike/Attack/Xx6/none
+Ironclad/Strike/Attack/6/none
+Silent/Envenom/Power/0/Poison
+Defect/Frost/Skill/0/Block
+Defect/Echo Form/Power/0/Double Play

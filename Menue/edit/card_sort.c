@@ -1,10 +1,11 @@
 #include "../util/card_header.h"
 
-void mainSort(t_field *f, int column, int direction, int sortType) {
+void mainSort(t_field *f, int column, int direction, int sortType, int entryAmount) {
   printf("\n#DEBUG mainSort");
   switch(sortType) {
     case 1:
       bubblesort(f, column, direction);
+
       break;
     case 2:
       //quicksort();
@@ -15,7 +16,7 @@ void mainSort(t_field *f, int column, int direction, int sortType) {
   }
 }
 
-void bubblesort(t_field *f, int column, int direction) {
+void bubblesort(t_field *f, int column, int direction, int entryAmount) {
   printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();
   f -> mom = f->  start;
@@ -58,8 +59,7 @@ void bubblesort(t_field *f, int column, int direction) {
     f -> mom = f -> start;
   }
   clock_t endTime = clock();
-  printf("#DEBUG Sorting finished successfully after %f miliseconds.", (double)(endTime - startTime)/1000);
-  int entryAmount = showEntryAmountMenu();
+  printf("\n#DEBUG Sorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
   printEntries(f, entryAmount, false);
   selectionMenu(f, entryAmount);
 

@@ -12,17 +12,16 @@
 #include "functions.c"
 #include "ui.c"
 
-// FUNCTIONALITY
 
-
-// CONSTANT LENGHTS
+// CONSTANT MAX LENGHTS
 #define CHARACTER_NAME_LN 20
-#define CARD_NAME_LN 20
-#define CARD_TYPE_LN 10
+#define CARD_NAME_LN 30
+#define CARD_TYPE_LN 20
 #define DAMAGE_NUMBER_LN 10
-#define EFFECT_TYPE_LN 20
-#define ENTRY_LN 82           // Length of all struct vars + 2 for \n at the end of line
+#define EFFECT_TYPE_LN 30
+#define ENTRY_LN 112           // Length of all struct vars + 2 for \n at the end of line
 
+// GLOBAL AVAILABLE PROPERTIES
 int entryCount;
 
 // STRUCTS
@@ -62,7 +61,7 @@ typedef struct {
 // CARD WRITE PROTOTYPES
 bool readData();
 void addData();
-void overwriteData();
+void ReplaceData();
 void writeData();
 bool checkInput();
 bool retry();

@@ -6,7 +6,7 @@ void mainDelete(t_field *f) {
     loadEntries(f, 4);
     printEntries(f, 4, true);
 
-    // Flag entered selection.
+    // Flag and delete entered entry range
     success = flagEntry(f);
     if(!success) printf("\n\n###ERR Error deleting entry.");
     else printf("\n\nDeleted successfully.");
@@ -29,54 +29,44 @@ bool flagEntry(t_field *f) {
 
   // increment the current pointer to to the entry number that was given by user in deleteFlag:
   f -> mom = f -> start;
-  while(f -> mom && i++ < deleteFlagFrom) {
+  while(f -> mom && ++i < deleteFlagTo) {
     f -> mom = f -> mom -> after;
-
-    // if flagged entry does not exist, throw a warning
     if(f -> mom == 0) {
       printf("\n##WARN Entry does not exist.");
-      exists = false;
+      return false;
     }
-    else {
-      i = 0;
-      while(f -> mom && i++ < deleteFlagTo) {
-        f -> mom = f -> mom -> after;
-        if(f -> mom == 0) {
-          printf("\n##WARN Entry does not exist.");
-          exists = false;
-        }
-        else exists = true;
-      }
-    }
-
-    if(!exists) return false;
-    else deleteFlaggedEntry(f, deleteFlagTo, deleteFlagFrom);
-    return true;
   }
+  exists = true;
+  deleteFlaggedEntry(f, deleteFlagTo, deleteFlagFrom);
+  return true;
 }
 
+
 void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom) {
-  for(int i = 0; i < deleteFlagTo - deleteFlagFrom; i++) {
+  //f -> mom = f -> start;
+  for(int i = 0; i <= deleteFlagTo - deleteFlagFrom; i++) {
     if(f -> mom -> after && f -> mom -> before) {      // Middle entry
       f -> mom -> before -> after = f -> mom -> after;
       f -> mom -> after -> before = f -> mom -> before;
       free(f -> mom);
       // set current pointer to start to avoid a NullPointerException
-      f -> mom = f -> start;
+      //f -> mom = f -> start;
     } else if(f -> mom -> before) {      // last entry
       f -> mom -> before -> after = 0;
       f -> last = f -> mom -> before;
       free(f -> mom);
-      f -> mom = f -> start;
+      //f -> mom = f -> start;
     } else if(f -> mom -> after) {      // first entry
       f -> mom -> after -> before = 0;
       f -> start = f -> mom -> after;
       free(f -> mom);
-      f -> mom = f -> start;
+      //f -> mom = f -> start;
     } else {                            // only entry
       free(f -> mom);
     }
+    f -> mom = f -> mom -> before;
   }
-  entryCount - (deleteFlagTo - deleteFlagFrom);
+  f -> mom = f -> start;
+  entryCount - (deleteFlagTo-deleteFlagFrom);
   ReplaceData(f);
 }

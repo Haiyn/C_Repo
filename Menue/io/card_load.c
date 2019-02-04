@@ -3,26 +3,35 @@
 void mainRead(t_field *f) {
   int entryAmount = showEntryAmountMenu();
   if(entryAmount == 5) return;
-  bool readSuccess = loadEntries(f, entryAmount);
-  if(!readSuccess) {
-    printf("\n###ERR Reading process failed at card_read.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
-    int retrySelection;
-
-    if(scanf("%d", &retrySelection) == 1)  mainRead(f);
-    else {
-      return;
+  f -> mom = f -> start;
+  if(!f -> mom) {
+    bool readSuccess = loadEntries(f, entryAmount);
+    if(!readSuccess) {
+      printf("\n###ERR Reading process failed at card_load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
+      if(retry()) mainRead(f);
+      else return;
     }
   }
+
   else printf("\n#DEBUG Entries read. Printing %d entries...\n\n\n", entryAmount*10);    //TODO time measurement
   printEntries(f, entryAmount, true);
   selectionMenu(f, entryAmount);
   return;
 }
 
+
+
+// DATA IMPORT
+
 void txtRead(t_field *f) {
 
 }
 
+
+
+// UNIVERSAL LOADING & STRUCT ADDING
+
+// Reads the entries from the txt file and loads them into the struct
 bool loadEntries(t_field *f, int entryAmount) {
   printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
@@ -34,26 +43,21 @@ bool loadEntries(t_field *f, int entryAmount) {
   }
 
   printf("#DEBUG Pointers created. Scanning file...\n");
-  char entry[ENTRY_LN];
-  fgets(entry, ENTRY_LN, fp);
   while(!feof(fp)) {
-    fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
+    fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
     listAdd(f);
     /*strncpy(f -> characterName, entry, CHARACTER_NAME_LN);
     strncpy(f -> cardName, entry + CHARACTER_NAME_LN, CARD_NAME_LN);
     strncpy(f -> cardType, entry + CHARACTER_NAME_LN + CARD_NAME_LN, CARD_TYPE_LN);
     strncpy(f -> damageNumber, entry + CHARACTER_NAME_LN + CARD_NAME_LN + CARD_TYPE_LN, DAMAGE_NUMBER_LN);
     strncpy(f -> effectType, entry + CHARACTER_NAME_LN + CARD_NAME_LN + CARD_TYPE_LN + DAMAGE_NUMBER_LN, EFFECT_TYPE_LN);
-    listAdd(f);
-    fgets(entry, ENTRY_LN, fp);*/
+    listAdd(f);*/
     entryCount++;
   }
   fclose(fp);
   printf("#DEBUG Scanning completed. Found %d entries.\n", entryCount);
   return true;
 }
-
-
 
 void listAdd(t_field *f) {
   f -> mom = (t_card*)malloc(sizeof(t_card));      // reserves the size of the struct in main memeory, typecast needed because malloc's return value is a void pointer
@@ -72,6 +76,9 @@ void addEntry(t_field *f) {
   strcpy(f -> mom -> damageNumber, f -> damageNumber);
   strcpy(f -> mom -> effectType, f -> effectType);
 }
+
+
+// OUPTUT
 
 void printEntries(t_field *f, int entryAmount, bool firstCall) {
   if(firstCall) f -> mom = f -> start;
@@ -100,8 +107,10 @@ void printEntries(t_field *f, int entryAmount, bool firstCall) {
   }
 }
 
+
+// UI HANDLER
+
 void selectionMenu(t_field *f, int entryAmount) {
-  // SORT SELECTION: {column, direction, sortMethod}
   int selection, column, direction, sortType;
 
   // Show the options the user has to proceed
@@ -121,17 +130,13 @@ void selectionMenu(t_field *f, int entryAmount) {
       sortType = selectSortType();
       // select sort type (bubble or quicksort)
       switch(sortType) {
-        case 1: mainSort(f, column, direction, sortType);//bubblesort(f, column, direction);
+        case 1: mainSort(f, column, direction, sortType, entryAmount);//bubblesort(f, column, direction);
         case 2: //quicksort(f, column, direction);
         case 3: return;
       }
       printEntries(f, entryAmount, false);
       break;
     case 3:
-      system("clear");
-      mainDelete(f);
-      break;
-    case 4: // RETURN TO MAIN MENU
       system("clear");
       return;
     default:
