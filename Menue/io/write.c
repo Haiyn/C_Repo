@@ -1,4 +1,4 @@
-#include "../util/card_header.h"
+#include "../util/header.h"
 
 // DATA READING (USER INPUT)
 
@@ -58,7 +58,7 @@ bool readData(t_field *f) {
 // Add the input data to the txt file (opens appended)
 void addData(t_field *f) {
   FILE *fp;
-  fp = fopen("./data/card_data.txt", "a+");      // a+ opens the file appended (pointer moves to eof)
+  fp = fopen("./data/data.txt", "a+");      // a+ opens the file appended (pointer moves to eof)
   if(!validateFile(fp, "addData")) {
     waitForExit();
     return;
@@ -72,16 +72,16 @@ void addData(t_field *f) {
 
 // DATA DELETION
 
-// Replace the txt file with the whole struct (opens the file once with pointer the start)
+// Replace the txt file with the whole struct (opens the file once with pointer the first)
 void ReplaceData(t_field *f) {
   FILE *fp;
-  fp = fopen("./data/card_data.txt", "w");
+  fp = fopen("./data/data.txt", "w");
   if(!validateFile(fp, "ReplaceData")) {
     waitForExit();
     return;
   }
 
-  f -> mom  = f -> start;
+  f -> mom  = f -> first;
   while(f -> mom) {
     fprintf(fp, "%s/%s/%s/%s/%s\n", f -> mom -> characterName, f -> mom -> cardName, f -> mom -> cardType, f -> mom -> damageNumber, f -> mom -> effectType);
     f -> mom = f -> mom -> after;

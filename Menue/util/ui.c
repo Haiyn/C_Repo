@@ -1,40 +1,44 @@
-#include "card_header.h"
+#include "header.h"
 
 // UI MENUS
-int showMainMenu() {
+int selectMainMenuAction() {
   system("clear");
   int selection;
   printSeparator('-', 65, false);
-  printf("|\t\t\t\t\t\t\t\t|\n");                                 // 2 | chars + 5 horizontal tabs (5*8 whitespaces)
+  printSeparator(' ', 63, true);                                // 2 | chars + 5 horizontal tabs (5*8 whitespaces)
   printf("|\tChoose a sub-routine:\t\t\t\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
   printSeparator('-', 63, true);
-  printf("|\t\t\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
   printf("|   [1] Show & sort entries\t\t\t\t\t|\n");
   printf("|         Show and sort saved entries.\t\t\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
   printf("|   [2] Show pointers\t\t\t\t\t\t|\n");
   printf("|         Shows the pointers (hex) of all entries.\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
-  printf("|   [3] Add new entries\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [3] Search for entries\t\t\t\t\t|\n");
+  printf("|         Enter a keyword to find corresponding entries.\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [4] Add new entries\t\t\t\t\t\t|\n");
   printf("|         Open the prompt that lets you add new entries.\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
-  printf("|   [4] Import data\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [5] Import data\t\t\t\t\t\t|\n");
   printf("|         Import data from a formatted file.\t\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
-  printf("|   [5] Delte existing entries\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [6] Delte existing entries\t\t\t\t\t|\n");
   printf("|         Choose an entry to delete it.\t\t\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
-  printf("|   [6] Exit menu\t\t\t\t\t\t|\n");
-  printf("|\t\t\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [7] Exit menu\t\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
   printSeparator('-', 65, false);
   printf("Please enter a number: ");
   scanf("%d", &selection);
   fflush(stdin);
+  if(!checkInputSelection(1, 7, selection)) selectMainMenuAction();
   return selection;
 }
 
-int showEntryAmountMenu() {
+int selectEntryAmount() {
   int entryAmount;
   printf("\nHow many entries would you like to show?");
   printf("\n\t[1] 10");
@@ -45,6 +49,7 @@ int showEntryAmountMenu() {
   printf("\nPlease enter a number: ");
   scanf("%d", &entryAmount);
   fflush(stdin);
+  if(!checkInputSelection(1, 5, entryAmount)) selectEntryAmount();
   return entryAmount;
 }
 

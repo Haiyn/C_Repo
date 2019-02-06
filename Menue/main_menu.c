@@ -1,10 +1,11 @@
-#include "./util/card_header.h"
+#include "./util/header.h"
 
-#include "./io/card_load.c"
-#include "./io/card_hex.c"
-#include "./io/card_write.c"
-#include "./edit/card_delete.c"
-#include "./edit/card_sort.c"
+#include "./io/load.c"
+#include "./io/hex.c"
+#include "./io/write.c"
+#include "./edit/delete.c"
+#include "./edit/sort.c"
+#include "./edit/search.c"
 
 
 int main() {
@@ -12,13 +13,13 @@ int main() {
   t_field field;
   t_field *f = &field;
   f -> mom = 0;
-  f -> start = 0;
+  f -> first = 0;
   f -> last = 0;
 
 
   // Call main menu and validate input
-  int selection = showMainMenu();
-  if(!checkInputSelection(1, 6, selection)) showMainMenu();
+  int selection = selectMainMenuAction();
+  if(!checkInputSelection(1, 6, selection)) selectMainMenuAction();
 
   // run the selected sub-routine
   switch(selection) {
@@ -32,16 +33,20 @@ int main() {
       break;
     case 3:
       system("clear");
-      mainWrite(f);
+      mainSearch(f);
       break;
     case 4:
       system("clear");
-      importData(f);
+      mainWrite(f);
       break;
     case 5:
-      mainDelete(f);
+      system("clear");
+      importData(f);
       break;
     case 6:
+      mainDelete(f);
+      break;
+    case 7:
       system("clear");
       exit(0);
     default:

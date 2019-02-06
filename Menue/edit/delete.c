@@ -1,4 +1,4 @@
-#include "../util/card_header.h"
+#include "../util/header.h"
 
 void mainDelete(t_field *f) {
     bool success = false;
@@ -28,7 +28,7 @@ bool flagEntry(t_field *f) {
 
 
   // increment the current pointer to to the entry number that was given by user in deleteFlag:
-  f -> mom = f -> start;
+  f -> mom = f -> first;
   while(f -> mom && ++i < deleteFlagTo) {
     f -> mom = f -> mom -> after;
     if(f -> mom == 0) {
@@ -43,30 +43,30 @@ bool flagEntry(t_field *f) {
 
 
 void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom) {
-  //f -> mom = f -> start;
+  //f -> mom = f -> first;
   for(int i = 0; i <= deleteFlagTo - deleteFlagFrom; i++) {
     if(f -> mom -> after && f -> mom -> before) {      // Middle entry
       f -> mom -> before -> after = f -> mom -> after;
       f -> mom -> after -> before = f -> mom -> before;
       free(f -> mom);
-      // set current pointer to start to avoid a NullPointerException
-      //f -> mom = f -> start;
+      // set current pointer to first to avoid a NullPointerException
+      //f -> mom = f -> first;
     } else if(f -> mom -> before) {      // last entry
       f -> mom -> before -> after = 0;
       f -> last = f -> mom -> before;
       free(f -> mom);
-      //f -> mom = f -> start;
+      //f -> mom = f -> first;
     } else if(f -> mom -> after) {      // first entry
       f -> mom -> after -> before = 0;
-      f -> start = f -> mom -> after;
+      f -> first = f -> mom -> after;
       free(f -> mom);
-      //f -> mom = f -> start;
+      //f -> mom = f -> first;
     } else {                            // only entry
       free(f -> mom);
     }
     f -> mom = f -> mom -> before;
   }
-  f -> mom = f -> start;
+  f -> mom = f -> first;
   entryCount - (deleteFlagTo-deleteFlagFrom);
   ReplaceData(f);
 }

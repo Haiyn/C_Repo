@@ -1,17 +1,17 @@
-#include "../util/card_header.h"
+#include "../util/header.h"
 
 void mainHex(t_field *f) {
   // If the struct ist empty, load all entries (4) to the struct from text file
   if(!f -> mom) {
     bool readSuccess = loadEntries(f, 4);
     if(!readSuccess) {
-      printf("\n###ERR Reading process failed at card_load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
+      printf("\n###ERR Reading process failed at load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
       if(retry()) mainRead(f);
       else return;
     }
   }
   int i = 1;
-  f -> mom = f -> start;
+  f -> mom = f -> first;
   printSeparator('-', 143, false);
   printf("| %-4s %-12s | %-20s | %-10s | %-10s | %-20s | %-15s %-15s %-15s |\n",
                 "Nr.",

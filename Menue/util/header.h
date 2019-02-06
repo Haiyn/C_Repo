@@ -1,5 +1,5 @@
-#ifndef CARD_HEADER_H
-#define CARD_HEADER_H
+#ifndef HEADER_H
+#define HEADER_H
 
 // LIBRARIES
 #include <stdio.h>
@@ -15,8 +15,8 @@
 
 // CONSTANT MAX LENGHTS
 #define CHARACTER_NAME_LN 20
-#define CARD_NAME_LN 30
-#define CARD_TYPE_LN 20
+#define NAME_LN 30
+#define TYPE_LN 20
 #define DAMAGE_NUMBER_LN 10
 #define EFFECT_TYPE_LN 30
 #define ENTRY_LN 112           // Length of all struct vars + 2 for \n at the end of line
@@ -27,16 +27,16 @@ int entryCount;
 // STRUCTS
 struct card {
   char characterName[CHARACTER_NAME_LN];
-  char cardName[CARD_NAME_LN];
-  char cardType[CARD_TYPE_LN];
+  char cardName[NAME_LN];
+  char cardType[TYPE_LN];
   char damageNumber[DAMAGE_NUMBER_LN];
   char effectType[EFFECT_TYPE_LN];
 } card;
 
 typedef struct m_card {
   char characterName[CHARACTER_NAME_LN];
-  char cardName[CARD_NAME_LN];
-  char cardType[CARD_TYPE_LN];
+  char cardName[NAME_LN];
+  char cardType[TYPE_LN];
   char damageNumber[DAMAGE_NUMBER_LN];
   char effectType[EFFECT_TYPE_LN];
 
@@ -46,13 +46,13 @@ typedef struct m_card {
 
 typedef struct {
   char characterName[CHARACTER_NAME_LN];
-  char cardName[CARD_NAME_LN];
-  char cardType[CARD_TYPE_LN];
+  char cardName[NAME_LN];
+  char cardType[TYPE_LN];
   char damageNumber[DAMAGE_NUMBER_LN];
   char effectType[EFFECT_TYPE_LN];
 
   t_card *mom,
-         *start,
+         *first,
          *last;
 } t_field;
 
@@ -79,6 +79,10 @@ void selectionMenu();
 // CARD HEX PROTOTYPES
 void mainHex();
 
+// CARD SEARCH PROTOTYPES
+void mainSearch();
+void initializeValues();
+
 // CARD DELETE PROTOTYPES
 void mainDelete(t_field *f);
 bool flagEntry();
@@ -95,12 +99,13 @@ bool checkInputSelection();
 void waitForExit();
 
 // UI PROTOTYPES
-int showMainMenu();
-int showEntryAmountMenu();
-int showProceedSelectionMenu();
+int selectMainMenuAction();
+int selectEntryAmount();
+int selectProceedAction();
 int selectSortColumn();
 int selectSortDirection();
 int selectSortType();
+int selectImportFile();
 
 
 #endif

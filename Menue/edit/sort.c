@@ -1,4 +1,4 @@
-#include "../util/card_header.h"
+#include "../util/header.h"
 
 void mainSort(t_field *f, int column, int direction, int sortType, int entryAmount) {
   printf("\n#DEBUG mainSort");
@@ -19,7 +19,7 @@ void mainSort(t_field *f, int column, int direction, int sortType, int entryAmou
 void bubblesort(t_field *f, int column, int direction, int entryAmount) {
   printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();
-  f -> mom = f->  start;
+  f -> mom = f->  first;
   for (int i = 0; i < entryCount - 1; i++) {
     printf(".");
     for (int j = 0; j < entryCount - 1; j++) {
@@ -56,7 +56,7 @@ void bubblesort(t_field *f, int column, int direction, int entryAmount) {
       }
       f -> mom = f -> mom -> after;
     }
-    f -> mom = f -> start;
+    f -> mom = f -> first;
   }
   clock_t endTime = clock();
   printf("\n#DEBUG Sorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);

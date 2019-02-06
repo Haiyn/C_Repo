@@ -1,52 +1,4 @@
-#include "../util/card_header.h"
-
-// DATA IMPORT
-
-void importData(t_field *f) {
-  FILE *fp;
-  char path[80];
-  int selection = selectImportFile();
-  switch(selection) {
-    case 1:
-      fp = fopen("./data/import.txt", "r");
-      break;
-    case 2:
-      printf("\nPlease enter the file path (relative to card_load.c): ");
-      scanf(" %s", path);
-      fp = fopen(path, "r");
-      break;
-    case 3:
-      return;
-    default:
-      return;
-  }
-  if(!validateFile(fp, "readImportFile")) {
-    printf("Would you like to retry? [y/n]\n");
-    if(retry()) importData(f);
-    else return;
-  }
-  while(!feof(fp)) {
-    char firstChar = fgetc(fp);
-    if(firstChar == '*') {
-      printf("\n#DEBUG Detected comment line.");
-      while(fgetc(fp) != '\n') {
-        fseek(fp, 1, SEEK_CUR);
-      }
-    }
-    else  {
-      ungetc(firstChar, fp);
-      printf("\n#DEBUG Detected data line.");
-      fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
-      printf("\nENTRY: %s%s%s%s%s", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
-      listAdd(f);   // adds the read entry to the struct
-      addData(f);   // writes the entry to card_data.txt
-    }
-  }
-  fclose(fp);
-  if(selection == 1) resetImportFile();    // reformats the import.txt
-  waitForExit();
-}
-
+#include "../util/header.h"
 
 
 
@@ -54,14 +6,14 @@ void importData(t_field *f) {
 
 // Initiates output and sort functions
 void mainRead(t_field *f) {
-  int entryAmount = showEntryAmountMenu();
+  int entryAmount = selectEntryAmount();
   system("clear");
   if(entryAmount == 5) return;
-  f -> mom = f -> start;
+  f -> mom = f -> first;
   if(!f -> mom) {
     bool readSuccess = loadEntries(f, entryAmount);
     if(!readSuccess) {
-      printf("\n###ERR Reading process failed at card_load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
+      printf("\n###ERR Reading process failed at load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
       if(retry()) mainRead(f);
       else return;
     }
@@ -78,7 +30,7 @@ bool loadEntries(t_field *f, int entryAmount) {
   entryCount = 0;
   printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
-  fp = fopen("./data/card_data.txt", "a+");
+  fp = fopen("./data/data.txt", "a+");
   if(!validateFile(fp, "loadEntries")) {
     waitForExit();
     return false;
@@ -100,7 +52,7 @@ void listAdd(t_field *f) {
   addEntry(f);
   f -> mom -> before = f -> last;
   f -> mom -> after = 0;
-  if(f -> last == 0)  f -> start = f -> mom;
+  if(f -> last == 0)  f -> first = f -> mom;
   else f -> last -> after = f -> mom;
   f -> last = f -> mom;
 }
@@ -117,7 +69,7 @@ void addEntry(t_field *f) {
 // OUPTUT
 
 void printEntries(t_field *f, int entryAmount, bool firstCall) {
-  if(firstCall) f -> mom = f -> start;
+  if(firstCall) f -> mom = f -> first;
   printSeparator('-', 107, false);
   printf("| %-4s  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
               "Nr.",
@@ -178,4 +130,52 @@ void selectionMenu(t_field *f, int entryAmount) {
     default:
       return;
   }
+}
+
+
+// DATA IMPORT
+
+void importData(t_field *f) {
+  FILE *fp;
+  char path[80];
+  int selection = selectImportFile();
+  switch(selection) {
+    case 1:
+      fp = fopen("./data/import.txt", "r");
+      break;
+    case 2:
+      printf("\nPlease enter the file path (relative to load.c): ");
+      scanf(" %s", path);
+      fp = fopen(path, "r");
+      break;
+    case 3:
+      return;
+    default:
+      return;
+  }
+  if(!validateFile(fp, "readImportFile")) {
+    printf("Would you like to retry? [y/n]\n");
+    if(retry()) importData(f);
+    else return;
+  }
+  while(!feof(fp)) {
+    char firstChar = fgetc(fp);
+    if(firstChar == '*') {
+      printf("\n#DEBUG Detected comment line.");
+      while(fgetc(fp) != '\n') {
+        fseek(fp, 1, SEEK_CUR);
+      }
+    }
+    else  {
+      ungetc(firstChar, fp);
+      printf("\n#DEBUG Detected data line.");
+      fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
+      printf("\nENTRY: %s%s%s%s%s", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
+      listAdd(f);   // adds the read entry to the struct
+      addData(f);   // writes the entry to data.txt
+    }
+  }
+  fclose(fp);
+  if(selection == 1) resetImportFile();    // reformats the import.txt
+  waitForExit();
 }
