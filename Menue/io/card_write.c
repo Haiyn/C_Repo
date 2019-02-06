@@ -1,8 +1,5 @@
 #include "../util/card_header.h"
 
-
-
-
 // DATA READING (USER INPUT)
 
 void mainWrite(t_field *f) {
@@ -89,5 +86,24 @@ void ReplaceData(t_field *f) {
     fprintf(fp, "%s/%s/%s/%s/%s\n", f -> mom -> characterName, f -> mom -> cardName, f -> mom -> cardType, f -> mom -> damageNumber, f -> mom -> effectType);
     f -> mom = f -> mom -> after;
   }
+  fclose(fp);
+}
+
+
+
+
+// DATA IMPORT
+
+// Reformats import.txt with the standard header (instructions about usage)
+void resetImportFile() {
+  FILE *fp;
+  fp = fopen("./data/import.txt", "w");
+  if(!validateFile(fp, "resetImportFile")) {
+    waitForExit();
+    return;
+  }
+  fprintf(fp, "*** IMPORT FILE\n***\n*** This is the import file. Enter sets of data in the following format to import them:\n");
+  fprintf(fp, "*** [Character Name]/[Card Name]/[Card Type]/[Damage Number]/[Effects]\n*** Replace [...] with the corresponding value.\n***\n");
+  fprintf(fp, "*** This is a comment line, it will be ignored during the import process.\n***\n***\n***----------------------------------------------\n");
   fclose(fp);
 }

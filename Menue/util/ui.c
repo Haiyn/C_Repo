@@ -1,14 +1,14 @@
 #include "card_header.h"
 
 // UI MENUS
-
-// MAIN MENU
 int showMainMenu() {
   system("clear");
   int selection;
-  printf("-----------------------------------------------------------------\n");    //64 horizontal
+  printSeparator('-', 65, false);
   printf("|\t\t\t\t\t\t\t\t|\n");                                 // 2 | chars + 5 horizontal tabs (5*8 whitespaces)
   printf("|\tChoose a sub-routine:\t\t\t\t\t|\n");
+  printf("|\t\t\t\t\t\t\t\t|\n");
+  printSeparator('-', 63, true);
   printf("|\t\t\t\t\t\t\t\t|\n");
   printf("|   [1] Show & sort entries\t\t\t\t\t|\n");
   printf("|         Show and sort saved entries.\t\t\t\t|\n");
@@ -27,7 +27,7 @@ int showMainMenu() {
   printf("|\t\t\t\t\t\t\t\t|\n");
   printf("|   [6] Exit menu\t\t\t\t\t\t|\n");
   printf("|\t\t\t\t\t\t\t\t|\n");
-  printf("-----------------------------------------------------------------\n");
+  printSeparator('-', 65, false);
   printf("Please enter a number: ");
   scanf("%d", &selection);
   fflush(stdin);
@@ -49,7 +49,7 @@ int showEntryAmountMenu() {
 }
 
 // PROCEED AFTER SHOWING ENTRIES
-int showProceedSelectionMenu() {
+int selectProceedAction() {
   int selection;
   printf("\n\nWhat would you like to do?");
   printf("\n  [1] Show next 10 entries");
@@ -59,7 +59,7 @@ int showProceedSelectionMenu() {
 
   scanf("%d", &selection);
   fflush(stdin);
-  if(!checkInputSelection(1, 3, selection)) showProceedSelectionMenu();
+  if(!checkInputSelection(1, 3, selection)) selectProceedAction();
 
   return selection;
 }
@@ -102,4 +102,18 @@ int selectSortType() {
   scanf("%d", &sortType);
   if(!checkInputSelection(1, 3, sortType)) selectSortType();
   return sortType;
+}
+
+
+// PICK IMPORT PATH
+int selectImportFile() {
+  int selection;
+  printf("\n\nChoose the import file:");
+  printf("\n  [1] default import file (/data/import.txt)");
+  printf("\n  [2] Enter costum file path");
+  printf("\n  [3] Exit");
+  printf("\n\nPlease enter a number: ");
+  scanf("%d", &selection);
+  if(!checkInputSelection(1, 3, selection)) selectImportFile();
+  return selection;
 }

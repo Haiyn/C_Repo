@@ -36,7 +36,7 @@ int main() {
       break;
     case 4:
       system("clear");
-      printf("Not yet implemented.");
+      importData(f);
       break;
     case 5:
       mainDelete(f);

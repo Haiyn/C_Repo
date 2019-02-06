@@ -12,7 +12,8 @@ void mainHex(t_field *f) {
   }
   int i = 1;
   f -> mom = f -> start;
-  printf("\n%-4s %-12s %-20s %-10s %-10s %-20s %-15s %-15s %-15s",
+  printSeparator('-', 143, false);
+  printf("| %-4s %-12s | %-20s | %-10s | %-10s | %-20s | %-15s %-15s %-15s |\n",
                 "Nr.",
                 "Char. Name",
                 "Card Name",
@@ -22,8 +23,9 @@ void mainHex(t_field *f) {
                 "BEFORE",
                 "MOM",
                 "AFTER");
+  printSeparator('-', 141, true);
   while (f -> mom != 0) {
-    printf("\n[%-2d] %-12s %-20s %-10s %-10s %-20s %-15p %-15p %-15p",
+    printf("| [%-2d] %-12s | %-20s | %-10s | %-10s | %-20s | %-15p %-15p %-15p |\n",
                   i,
                   f -> mom -> characterName,
                   f -> mom -> cardName,
@@ -36,7 +38,7 @@ void mainHex(t_field *f) {
     f -> mom = f -> mom -> after;
     i++;
   }
-
+  printSeparator('-', 143, false);
   // Keep the menu open until user confirms exit
   waitForExit();
   return;

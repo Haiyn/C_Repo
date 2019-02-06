@@ -31,6 +31,18 @@ bool retry() {
   }
 }
 
+
+// UI FUNCTIONS
+// Prints a given amount of a specifc character (with or without a | border), acting as a seperator
+void printSeparator(char separator, int amount, bool border) {
+  if(border) printf("|");
+  for(int i = 0; i < amount; i++) {
+    printf("%c", separator);
+  }
+  if (border) printf("|\n");
+  else printf("\n");
+}
+
 // FILE VALIDATION
 bool validateFile(FILE *fp, char functionName[30]) {
   if(!fp) {

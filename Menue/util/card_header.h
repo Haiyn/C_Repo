@@ -65,8 +65,11 @@ void ReplaceData();
 void writeData();
 bool checkInput();
 bool retry();
+void resetImportFile();
 
 // CARD LOAD PROTOTYPES
+void readImportFile();
+char readFilePath();
 void printEntries(t_field *f, int entrySelection, bool firstCall);
 bool loadEntries();
 void listAdd();

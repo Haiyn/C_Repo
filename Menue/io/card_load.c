@@ -1,7 +1,61 @@
 #include "../util/card_header.h"
 
+// DATA IMPORT
+
+void importData(t_field *f) {
+  FILE *fp;
+  char path[80];
+  int selection = selectImportFile();
+  switch(selection) {
+    case 1:
+      fp = fopen("./data/import.txt", "r");
+      break;
+    case 2:
+      printf("\nPlease enter the file path (relative to card_load.c): ");
+      scanf(" %s", path);
+      fp = fopen(path, "r");
+      break;
+    case 3:
+      return;
+    default:
+      return;
+  }
+  if(!validateFile(fp, "readImportFile")) {
+    printf("Would you like to retry? [y/n]\n");
+    if(retry()) importData(f);
+    else return;
+  }
+  while(!feof(fp)) {
+    char firstChar = fgetc(fp);
+    if(firstChar == '*') {
+      printf("\n#DEBUG Detected comment line.");
+      while(fgetc(fp) != '\n') {
+        fseek(fp, 1, SEEK_CUR);
+      }
+    }
+    else  {
+      ungetc(firstChar, fp);
+      printf("\n#DEBUG Detected data line.");
+      fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
+      printf("\nENTRY: %s%s%s%s%s", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
+      listAdd(f);   // adds the read entry to the struct
+      addData(f);   // writes the entry to card_data.txt
+    }
+  }
+  fclose(fp);
+  if(selection == 1) resetImportFile();    // reformats the import.txt
+  waitForExit();
+}
+
+
+
+
+// UNIVERSAL LOADING & STRUCT ADDING
+
+// Initiates output and sort functions
 void mainRead(t_field *f) {
   int entryAmount = showEntryAmountMenu();
+  system("clear");
   if(entryAmount == 5) return;
   f -> mom = f -> start;
   if(!f -> mom) {
@@ -19,25 +73,13 @@ void mainRead(t_field *f) {
   return;
 }
 
-
-
-// DATA IMPORT
-
-void txtRead(t_field *f) {
-
-}
-
-
-
-// UNIVERSAL LOADING & STRUCT ADDING
-
 // Reads the entries from the txt file and loads them into the struct
 bool loadEntries(t_field *f, int entryAmount) {
+  entryCount = 0;
   printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
   fp = fopen("./data/card_data.txt", "a+");
-  if(!fp) {
-    printf("###ERR at loadEntries: File not found.");
+  if(!validateFile(fp, "loadEntries")) {
     waitForExit();
     return false;
   }
@@ -46,12 +88,6 @@ bool loadEntries(t_field *f, int entryAmount) {
   while(!feof(fp)) {
     fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
     listAdd(f);
-    /*strncpy(f -> characterName, entry, CHARACTER_NAME_LN);
-    strncpy(f -> cardName, entry + CHARACTER_NAME_LN, CARD_NAME_LN);
-    strncpy(f -> cardType, entry + CHARACTER_NAME_LN + CARD_NAME_LN, CARD_TYPE_LN);
-    strncpy(f -> damageNumber, entry + CHARACTER_NAME_LN + CARD_NAME_LN + CARD_TYPE_LN, DAMAGE_NUMBER_LN);
-    strncpy(f -> effectType, entry + CHARACTER_NAME_LN + CARD_NAME_LN + CARD_TYPE_LN + DAMAGE_NUMBER_LN, EFFECT_TYPE_LN);
-    listAdd(f);*/
     entryCount++;
   }
   fclose(fp);
@@ -82,20 +118,19 @@ void addEntry(t_field *f) {
 
 void printEntries(t_field *f, int entryAmount, bool firstCall) {
   if(firstCall) f -> mom = f -> start;
-  printf("%-4s   %-20s %-20s %-15s %-10s %-20s\n",
+  printSeparator('-', 107, false);
+  printf("| %-4s  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
               "Nr.",
               "Character Name",
               "Card Name",
               "Card Type",
               "Damage",
-              "Effects\n");
+              "Effects");
+  printSeparator('-', 105, true);
   for(int i = 0, index = 1; i < entryAmount*10; i++, index++) {
     if(entryAmount == 4) i = 0;
-    if(f -> mom == 0) {
-      printf("\n\n#DEBUG End of entries. Terminated print loop.\n");
-      break;
-    }
-    printf("[%-2d]   %-20s %-20s %-15s %-10s %-20s\n",
+    if(!f -> mom) break;
+    printf("| [%-2d]  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
                 index,
                 f -> mom -> characterName,
                 f -> mom -> cardName,
@@ -105,6 +140,7 @@ void printEntries(t_field *f, int entryAmount, bool firstCall) {
 
     f -> mom = f -> mom -> after;
   }
+  printSeparator('-', 107, false);
 }
 
 
@@ -113,8 +149,8 @@ void printEntries(t_field *f, int entryAmount, bool firstCall) {
 void selectionMenu(t_field *f, int entryAmount) {
   int selection, column, direction, sortType;
 
-  // Show the options the user has to proceed
-  selection = showProceedSelectionMenu();
+  // Show the options the user has to proceed and return the choice
+  selection = selectProceedAction();
   switch(selection) {
     case 1: // SHOW NEXT 10 ENTRIES
       system("clear");
@@ -140,6 +176,6 @@ void selectionMenu(t_field *f, int entryAmount) {
       system("clear");
       return;
     default:
-      break;
+      return;
   }
 }
