@@ -97,18 +97,6 @@ int selectSortDirection() {
   return direction;
 }
 
-int selectSortType() {
-  int sortType;
-  printf("\n\nSort Method:");
-  printf("\n  [1] Use Bubblesort");
-  printf("\n  [2] Use Quicksort");
-  printf("\n  [3] Exit");
-  printf("\n\nPlease enter a number: ");
-  scanf("%d", &sortType);
-  if(!checkInputSelection(1, 3, sortType)) selectSortType();
-  return sortType;
-}
-
 
 // PICK IMPORT PATH
 int selectImportFile() {

@@ -1,21 +1,5 @@
 #include "../util/header.h"
 
-void mainSort(t_field *f, int column, int direction, int sortType, int entryAmount) {
-  printf("\n#DEBUG mainSort");
-  switch(sortType) {
-    case 1:
-      bubblesort(f, column, direction);
-
-      break;
-    case 2:
-      //quicksort();
-      break;
-    default:
-      printf("\n\n###ERR Not a sortType");
-      break;
-  }
-}
-
 void bubblesort(t_field *f, int column, int direction, int entryAmount) {
   printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();

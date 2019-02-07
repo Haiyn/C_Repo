@@ -99,7 +99,7 @@ void printEntries(t_field *f, int entryAmount, bool firstCall) {
 // UI HANDLER
 
 void selectionMenu(t_field *f, int entryAmount) {
-  int selection, column, direction, sortType;
+  int selection, column, direction;
 
   // Show the options the user has to proceed and return the choice
   selection = selectProceedAction();
@@ -115,13 +115,8 @@ void selectionMenu(t_field *f, int entryAmount) {
       if(column == 5) return;
       direction = selectSortDirection();
       if(direction == 3) return;
-      sortType = selectSortType();
-      // select sort type (bubble or quicksort)
-      switch(sortType) {
-        case 1: mainSort(f, column, direction, sortType, entryAmount);//bubblesort(f, column, direction);
-        case 2: //quicksort(f, column, direction);
-        case 3: return;
-      }
+      bubblesort(f, column, direction, entryAmount);
+      system("clear");
       printEntries(f, entryAmount, false);
       break;
     case 3:

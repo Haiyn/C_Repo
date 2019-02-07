@@ -91,7 +91,6 @@ bool flagEntry();
 void deleteFlaggedEntry();
 
 // SORT PROTOTYPES
-void mainSort();
 void bubblesort();
 void checkDirection();
 void switchEntries();
