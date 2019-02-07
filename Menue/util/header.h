@@ -100,7 +100,7 @@ void switchEntries();
 bool checkInputSelection();
 void waitForExit();
 bool checkInput();
-bool retry();
+bool userQuery();
 
 // UI PROTOTYPES
 int selectMainMenuAction();
@@ -109,6 +109,7 @@ int selectProceedAction();
 int selectSortColumn();
 int selectSortDirection();
 int selectSortType();
+int selectEntryToCopy();
 int selectImportFile();
 
 
