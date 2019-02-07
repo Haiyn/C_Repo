@@ -1,5 +1,3 @@
-Silent/Caltrops/Power/0/Thorns
-Silent/Footwork/Power/0/Dexterity
 Ironclad/Rupture/Power/0/Card
 Ironclad/Perfected Strike/Attack/Xx6/none
 Ironclad/Strike/Attack/6/none
@@ -10,3 +8,5 @@ Defect/Strike/Attack/6/none
 Silent/Strike/Attack/6/none
 Defect/Strike/Attack/6/none
 Silent/Strike/Attack/6/none
+Ironclad/Bash/Attack/8/Vulnerable
+Ironclad/Entrench/Skill/0/Block

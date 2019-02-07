@@ -1,5 +1,4 @@
 #include "header.h"
-#include <time.h>
 
 // USER INPUT CHECKS
 // Checks whether the input number is greater or smaller than the possible selections in a selection menu
@@ -22,7 +21,7 @@ void waitForExit() {
 }
 
 // Asks the user if he wants to run the sub-routine again. Return
-bool retry() {
+bool userQuery() {
   char retrySelection[1];
   scanf(" %[^\n]", retrySelection);
   if(retrySelection[0] == 'y')  return true;
@@ -42,6 +41,7 @@ void printSeparator(char separator, int amount, bool border) {
   if (border) printf("|\n");
   else printf("\n");
 }
+
 
 // FILE VALIDATION
 bool validateFile(FILE *fp, char functionName[30]) {

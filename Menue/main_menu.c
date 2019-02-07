@@ -1,11 +1,11 @@
 #include "./util/header.h"
 
-#include "./io/load.c"
-#include "./io/hex.c"
-#include "./io/write.c"
+#include "./io/input.c"
+#include "./io/output.c"
 #include "./edit/delete.c"
 #include "./edit/sort.c"
 #include "./edit/search.c"
+#include "./util/data_functions.c"
 
 
 int main() {
@@ -19,17 +19,17 @@ int main() {
 
   // Call main menu and validate input
   int selection = selectMainMenuAction();
-  if(!checkInputSelection(1, 6, selection)) selectMainMenuAction();
+  if(!checkInputSelection(1, 7, selection)) selectMainMenuAction();
 
   // run the selected sub-routine
   switch(selection) {
     case 1:
       system("clear");
-      mainRead(f);
+      viewEntries(f);
       break;
     case 2:
       system("clear");
-      mainHex(f);
+      printHex(f);
       break;
     case 3:
       system("clear");
@@ -37,14 +37,14 @@ int main() {
       break;
     case 4:
       system("clear");
-      mainWrite(f);
+      inputEntry(f);
       break;
     case 5:
       system("clear");
       importData(f);
       break;
     case 6:
-      mainDelete(f);
+      deleteEntries(f);
       break;
     case 7:
       system("clear");

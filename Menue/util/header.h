@@ -59,26 +59,27 @@ typedef struct {
 
 
 
-// CARD WRITE PROTOTYPES
-bool readData();
-void addData();
-void ReplaceData();
-void writeData();
-bool checkInput();
-bool retry();
-void resetImportFile();
+// CARD INPUT PROTOTYPES
+void inputEntry();
+bool readInputData();
+void importData();
 
-// CARD LOAD PROTOTYPES
-void readImportFile();
-char readFilePath();
+// OUTPUT PROTOTYPES
+void viewEntries();
 void printEntries(t_field *f, int entrySelection, bool firstCall);
+void selectionMenu();
+void printHex();
+
+// DATA FUNCTIONS PROTOTYPES
 bool loadEntries();
 void listAdd();
 void addEntry();
-void selectionMenu();
-
-// CARD HEX PROTOTYPES
-void mainHex();
+void readImportFile();
+char readFilePath();
+void resetImportFile();
+void ReplaceData();
+void writeData();
+void addData();
 
 // CARD SEARCH PROTOTYPES
 void mainSearch();
@@ -98,6 +99,8 @@ void switchEntries();
 // FUNCTIONS PROTOTYPES
 bool checkInputSelection();
 void waitForExit();
+bool checkInput();
+bool retry();
 
 // UI PROTOTYPES
 int selectMainMenuAction();

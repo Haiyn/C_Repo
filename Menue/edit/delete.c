@@ -1,6 +1,6 @@
 #include "../util/header.h"
 
-void mainDelete(t_field *f) {
+void deleteEntries(t_field *f) {
     bool success = false;
     // load data from txt and print all existing entries
     loadEntries(f, 4);

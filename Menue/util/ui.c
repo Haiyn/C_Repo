@@ -59,12 +59,12 @@ int selectProceedAction() {
   printf("\n\nWhat would you like to do?");
   printf("\n  [1] Show next 10 entries");
   printf("\n  [2] Sort entries");
-  printf("\n  [3] Return to the main menu");
+  printf("\n  [3] Copy and edit entries");
+  printf("\n  [4] Return to the main menu");
   printf("\n\nPlease enter a number: ");
-
   scanf("%d", &selection);
   fflush(stdin);
-  if(!checkInputSelection(1, 3, selection)) selectProceedAction();
+  if(!checkInputSelection(1, 4, selection)) selectProceedAction();
 
   return selection;
 }

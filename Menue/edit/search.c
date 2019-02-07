@@ -40,7 +40,7 @@ void mainSearch(t_field *f) {
   }
   printFooter(foundEntries, startTime);
   printf("\n\nWould you like to try searching for something else? [y/n] ");
-  if(retry()) mainSearch(f);
+  if(userQuery()) mainSearch(f);
 }
 
 void printHeader() {
