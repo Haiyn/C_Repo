@@ -33,6 +33,7 @@ struct card {
   char effectType[EFFECT_TYPE_LN];
 } card;
 
+
 typedef struct m_card {
   char characterName[CHARACTER_NAME_LN];
   char cardName[NAME_LN];
@@ -81,7 +82,8 @@ void mainHex();
 
 // CARD SEARCH PROTOTYPES
 void mainSearch();
-void initializeValues();
+void printHeader();
+void printFooter();
 
 // CARD DELETE PROTOTYPES
 void mainDelete(t_field *f);

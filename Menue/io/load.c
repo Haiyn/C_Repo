@@ -43,7 +43,7 @@ bool loadEntries(t_field *f, int entryAmount) {
     entryCount++;
   }
   fclose(fp);
-  printf("#DEBUG Scanning completed. Found %d entries.\n", entryCount);
+  printf("#DEBUG Scanning completed. Loaded %d entries.\n", entryCount);
   return true;
 }
 
