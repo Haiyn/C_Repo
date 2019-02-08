@@ -1,6 +1,6 @@
 #include "../util/header.h"
 
-void mainSearch(t_field *f) {
+void searchEntries(t_field *f) {
   system("clear");
   int foundEntries = 0;
   char keyword[30], pointerArray[5][30];
@@ -40,7 +40,7 @@ void mainSearch(t_field *f) {
   }
   printFooter(foundEntries, startTime);
   printf("\n\nWould you like to try searching for something else? [y/n] ");
-  if(userQuery()) mainSearch(f);
+  if(userQuery()) searchEntries(f);
 }
 
 void printHeader() {

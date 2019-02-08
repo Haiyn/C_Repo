@@ -20,77 +20,13 @@ void viewEntries(t_field *f) {
   return;
 }
 
-void printEntries(t_field *f, int entryAmount, bool firstCall) {
-  if(firstCall) f -> mom = f -> first;
-  printSeparator('-', 107, false);
-  printf("| %-4s  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
-              "Nr.",
-              "Character Name",
-              "Card Name",
-              "Card Type",
-              "Damage",
-              "Effects");
-  printSeparator('-', 105, true);
-  for(int i = 0, index = 1; i < entryAmount*10; i++, index++) {
-    if(entryAmount == 4) i = 0;
-    if(!f -> mom) break;
-    printf("| [%-2d]  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
-                index,
-                f -> mom -> characterName,
-                f -> mom -> cardName,
-                f -> mom -> cardType,
-                f -> mom -> damageNumber,
-                f -> mom -> effectType);
-
-    f -> mom = f -> mom -> after;
-  }
-  printSeparator('-', 107, false);
-}
-
-
-// UI HANDLER
-
-void selectionMenu(t_field *f, int entryAmount) {
-  int selection, column, direction;
-
-  // Show the options the user has to proceed and return the choice
-  selection = selectProceedAction();
-  switch(selection) {
-    case 1: // SHOW NEXT 10 ENTRIES
-      system("clear");
-      printEntries(f, 1, false);
-      selectionMenu(f, entryAmount);
-      break;
-    case 2: // SORT ENTRIES
-      // Show the different settings menus
-      column = selectSortColumn();
-      if(column == 5) return;
-      direction = selectSortDirection();
-      if(direction == 3) return;
-      bubblesort(f, column, direction, entryAmount);
-      system("clear");
-      printEntries(f, entryAmount, false);
-      break;
-    case 3:
-      copyEntry();
-      break;
-    case 4:
-      system("clear");
-      return;
-    default:
-      return;
-  }
-}
-
-#include "../util/header.h"
-
-void printHex(t_field *f) {
+void viewHex(t_field *f) {
   // If the struct ist empty, load all entries (4) to the struct from text file
   if(!f -> mom) {
     bool readSuccess = loadEntries(f, 4);
     if(!readSuccess) {
       printf("\n###ERR Reading process failed at load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
-      if(userQuery()) printHex(f);
+      if(userQuery()) viewHex(f);
       else return;
     }
   }
@@ -126,4 +62,28 @@ void printHex(t_field *f) {
   // Keep the menu open until user confirms exit
   waitForExit();
   return;
+}
+
+
+
+
+// UI HANDLER
+
+void selectionMenu(t_field *f, int entryAmount) {
+  int selection, column, direction;
+
+  // Show the options the user has to proceed and return the choice
+  selection = selectProceedAction();
+  switch(selection) {
+    case 1: // SHOW NEXT 10 ENTRIES
+      system("clear");
+      printEntries(f, 1, false);
+      selectionMenu(f, entryAmount);
+      break;
+    case 2:
+      system("clear");
+      return;
+    default:
+      return;
+  }
 }

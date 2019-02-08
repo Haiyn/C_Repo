@@ -44,6 +44,35 @@ void addEntry(t_field *f) {
   strcpy(f -> mom -> effectType, f -> effectType);
 }
 
+// DATA OUTPUT
+
+// output a set amount of entries
+void printEntries(t_field *f, int entryAmount, bool firstCall) {
+  if(firstCall) f -> mom = f -> first;
+  printSeparator('-', 107, false);
+  printf("| %-4s  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
+              "Nr.",
+              "Character Name",
+              "Card Name",
+              "Card Type",
+              "Damage",
+              "Effects");
+  printSeparator('-', 105, true);
+  for(int i = 0, index = 1; i < entryAmount*10; i++, index++) {
+    if(entryAmount == 4) i = 0;
+    if(!f -> mom) break;
+    printf("| [%-2d]  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
+                index,
+                f -> mom -> characterName,
+                f -> mom -> cardName,
+                f -> mom -> cardType,
+                f -> mom -> damageNumber,
+                f -> mom -> effectType);
+
+    f -> mom = f -> mom -> after;
+  }
+  printSeparator('-', 107, false);
+}
 
 // DATA WRITING
 
@@ -77,15 +106,6 @@ void ReplaceData(t_field *f) {
   fclose(fp);
 }
 
-void copyEntry(t_field *f) {
-  int entryIndex;
-  entryIndex = selectEntryToCopy();
-  f -> mom = f -> start;
-  while(i < entryIndex - 1) {
-    f -> mom = f -> mom -> after;
-  }
-  // TODO
-}
 
 // Reformats import.txt with the standard header (instructions about usage)
 void resetImportFile() {

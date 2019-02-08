@@ -10,25 +10,31 @@ int selectMainMenuAction() {
   printSeparator(' ', 63, true);
   printSeparator('-', 63, true);
   printSeparator(' ', 63, true);
-  printf("|   [1] Show & sort entries\t\t\t\t\t|\n");
-  printf("|         Show and sort saved entries.\t\t\t\t|\n");
+  printf("|   [1] View entries\t\t\t\t\t\t|\n");
+  printf("|         View saved entries.\t\t\t\t\t|\n");
   printSeparator(' ', 63, true);
-  printf("|   [2] Show pointers\t\t\t\t\t\t|\n");
-  printf("|         Shows the pointers (hex) of all entries.\t\t|\n");
+  printf("|   [2] View pointers\t\t\t\t\t\t|\n");
+  printf("|         View the pointers (hex) of all entries.\t\t|\n");
   printSeparator(' ', 63, true);
   printf("|   [3] Search for entries\t\t\t\t\t|\n");
   printf("|         Enter a keyword to find corresponding entries.\t|\n");
   printSeparator(' ', 63, true);
-  printf("|   [4] Add new entries\t\t\t\t\t\t|\n");
+  printf("|   [4] Sort entries\t\t\t\t\t\t|\n");
+  printf("|         Sort saved entries.\t\t\t\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [5] Add new entries\t\t\t\t\t\t|\n");
   printf("|         Open the prompt that lets you add new entries.\t|\n");
   printSeparator(' ', 63, true);
-  printf("|   [5] Import data\t\t\t\t\t\t|\n");
+  printf("|   [6] Copy entry\t\t\t\t\t\t|\n");
+  printf("|         Choose an entry to duplicate (and edit).\t\t|\n");
+  printSeparator(' ', 63, true);
+  printf("|   [7] Import data\t\t\t\t\t\t|\n");
   printf("|         Import data from a formatted file.\t\t\t|\n");
   printSeparator(' ', 63, true);
-  printf("|   [6] Delte existing entries\t\t\t\t\t|\n");
+  printf("|   [8] Delte existing entries\t\t\t\t\t|\n");
   printf("|         Choose an entry to delete it.\t\t\t\t|\n");
   printSeparator(' ', 63, true);
-  printf("|   [7] Exit menu\t\t\t\t\t\t|\n");
+  printf("|   [9] Exit menu\t\t\t\t\t\t|\n");
   printSeparator(' ', 63, true);
   printSeparator('-', 65, false);
   printf("Please enter a number: ");
@@ -58,13 +64,11 @@ int selectProceedAction() {
   int selection;
   printf("\n\nWhat would you like to do?");
   printf("\n  [1] Show next 10 entries");
-  printf("\n  [2] Sort entries");
-  printf("\n  [3] Copy and edit entries");
-  printf("\n  [4] Return to the main menu");
+  printf("\n  [2] Return to the main menu");
   printf("\n\nPlease enter a number: ");
   scanf("%d", &selection);
   fflush(stdin);
-  if(!checkInputSelection(1, 4, selection)) selectProceedAction();
+  if(!checkInputSelection(1, 2, selection)) selectProceedAction();
 
   return selection;
 }
@@ -95,6 +99,21 @@ int selectSortDirection() {
   scanf("%d", &direction);
   if(!checkInputSelection(1, 3, direction)) selectSortDirection();
   return direction;
+}
+
+int selectEditColumn() {
+  int selection;
+  printf("\n\nColumn you want to edit:");
+  printf("\n  [1] Character Name");
+  printf("\n  [2] Card Name");
+  printf("\n  [3] Card Type");
+  printf("\n  [4] Damage Number");
+  printf("\n  [4] Effect Type");
+  printf("\n  [5] Exit");
+  printf("\n\nPlease enter a number: ");
+  scanf("%d", &selection);
+  if(!checkInputSelection(1, 5, selection)) selectSortDirection();
+  return selection;
 }
 
 

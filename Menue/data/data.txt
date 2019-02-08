@@ -10,3 +10,7 @@ Defect/Strike/Attack/6/none
 Silent/Strike/Attack/6/none
 Ironclad/Bash/Attack/8/Vulnerable
 Ironclad/Entrench/Skill/0/Block
+Ironclad/Panic Button/Skill/0/Block
+All/Dazed/Status/0/Exhaust
+Ironclad/Rupture/Power/Card Draw/Card
+Defect/Electrodynamics/Power/0/Lightning

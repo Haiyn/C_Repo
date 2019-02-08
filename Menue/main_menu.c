@@ -1,10 +1,12 @@
 #include "./util/header.h"
 
-#include "./io/input.c"
-#include "./io/output.c"
-#include "./edit/delete.c"
-#include "./edit/sort.c"
-#include "./edit/search.c"
+#include "./sub/add.c"
+#include "./sub/copy.c"
+#include "./sub/delete.c"
+#include "./sub/import.c"
+#include "./sub/search.c"
+#include "./sub/sort.c"
+#include "./sub/view.c"
 #include "./util/data_functions.c"
 
 
@@ -20,34 +22,34 @@ int main() {
   // Call main menu and validate input
   int selection = selectMainMenuAction();
   if(!checkInputSelection(1, 7, selection)) selectMainMenuAction();
-
+  system("clear");
   // run the selected sub-routine
   switch(selection) {
     case 1:
-      system("clear");
       viewEntries(f);
       break;
     case 2:
-      system("clear");
-      printHex(f);
+      viewHex(f);
       break;
     case 3:
-      system("clear");
-      mainSearch(f);
+      searchEntries(f);
       break;
     case 4:
-      system("clear");
-      inputEntry(f);
+      sortEntries(f);
       break;
     case 5:
-      system("clear");
-      importData(f);
+      inputEntries(f);
       break;
     case 6:
-      deleteEntries(f);
+      copyEntries(f);
       break;
     case 7:
-      system("clear");
+      importEntries(f);
+      break;
+    case 8:
+      deleteEntries(f);
+      break;
+    case 9:
       exit(0);
     default:
       printf("\n###ERR Input not recognised\n");

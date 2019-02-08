@@ -60,15 +60,15 @@ typedef struct {
 
 
 // CARD INPUT PROTOTYPES
-void inputEntry();
+void inputEntries();
 bool readInputData();
-void importData();
+void importEntries();
 
 // OUTPUT PROTOTYPES
 void viewEntries();
 void printEntries(t_field *f, int entrySelection, bool firstCall);
 void selectionMenu();
-void printHex();
+void viewHex();
 
 // DATA FUNCTIONS PROTOTYPES
 bool loadEntries();
@@ -80,9 +80,11 @@ void resetImportFile();
 void ReplaceData();
 void writeData();
 void addData();
+void copyEntries();
+void editEntry();
 
 // CARD SEARCH PROTOTYPES
-void mainSearch();
+void searchEntries();
 void printHeader();
 void printFooter();
 

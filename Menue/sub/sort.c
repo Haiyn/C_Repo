@@ -1,6 +1,17 @@
 #include "../util/header.h"
 
-void bubblesort(t_field *f, int column, int direction, int entryAmount) {
+void sortEntries(t_field *f) {
+  int column, direction;
+  column = selectSortColumn();
+  if(column == 5) return;
+  direction = selectSortDirection();
+  if(direction == 3) return;
+  bubblesort(f, column, direction);
+  system("clear");
+  printEntries(f, 4, false);
+}
+
+void bubblesort(t_field *f, int column, int direction) {
   printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();
   f -> mom = f->  first;
@@ -44,9 +55,10 @@ void bubblesort(t_field *f, int column, int direction, int entryAmount) {
   }
   clock_t endTime = clock();
   printf("\n#DEBUG Sorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
-  printEntries(f, entryAmount, false);
-  selectionMenu(f, entryAmount);
+  printEntries(f, 4, false);
 
+  printf("Would you like to sort again? [y/n] ");
+  if(userQuery()) sortEntries(f);
   return;
 }
 
