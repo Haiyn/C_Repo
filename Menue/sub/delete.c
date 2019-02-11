@@ -4,7 +4,7 @@ void deleteEntries(t_field *f) {
     bool success = false;
     // load data from txt and print all existing entries
     int entryCount = loadEntries(f, 4);
-    printEntries(f, 4, true);
+    InitPrintEntries(f, 4);
 
     // Flag and delete entered entry range
     success = flagEntry(f, entryCount);
@@ -36,7 +36,6 @@ bool flagEntry(t_field *f, int entryCount) {
       return false;
     }
   }
-  exists = true;
   deleteFlaggedEntry(f, deleteFlagTo, deleteFlagFrom, entryCount);
   return true;
 }

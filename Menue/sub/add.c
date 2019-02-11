@@ -4,18 +4,13 @@
 
 void inputEntries(t_field *f) {
   system("clear");
-
-  printf("#DEBUG Starting read process...\n");
-
   bool aborted = readInputData(f);
   if(aborted) return;                   // if the action was aborted, return to the main menu
-  printf("\n#DEBUG Read process finished. Starting write process...\n");
   addData(f);
-  printf("#DEBUG Data writing finished.\n");
 
   printf("Would you like to add another entry? [y/n] ");
   if(userQuery())  {
-    memset(&card, 0, sizeof(card));     // reset the memory of the struct to avoid false data from previous input
+    //memset(&card, 0, sizeof(card));     // reset the memory of the struct to avoid false data from previous input
     inputEntries(f);
   }
 }

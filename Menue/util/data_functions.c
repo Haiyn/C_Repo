@@ -5,7 +5,6 @@
 // Reads the entries from the txt file and loads them into the struct
 int loadEntries(t_field *f, int entryAmount) {
   int entryCount = 0;
-  printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
   fp = fopen("./data/data.txt", "a+");
   if(!validateFile(fp, "loadEntries")) {
@@ -13,14 +12,13 @@ int loadEntries(t_field *f, int entryAmount) {
     return false;
   }
 
-  printf("#DEBUG Pointers created. Scanning file...\n");
   while(!feof(fp)) {
     fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
     listAdd(f);
     entryCount++;
   }
   fclose(fp);
-  printf("#DEBUG Scanning completed. Loaded %d entries.\n", entryCount);
+  printf("Reading completed. Loaded %d entries.\n", entryCount);
   return entryCount;
 }
 
@@ -46,9 +44,14 @@ void addEntry(t_field *f) {
 
 // DATA OUTPUT
 
+// shows the first 10 entries, needed for "show next 10 entries" functionality
+void InitPrintEntries(t_field *f, int entryAmount) {
+  f -> mom = f -> first;
+  printEntries(f, entryAmount);
+}
+
 // output a set amount of entries
-void printEntries(t_field *f, int entryAmount, bool firstCall) {
-  if(firstCall) f -> mom = f -> first;
+void printEntries(t_field *f, int entryAmount) {
   printSeparator('-', 107, false);
   printf("| %-4s  %-20s | %-20s | %-15s | %-10s | %-20s |\n",
               "Nr.",

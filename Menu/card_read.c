@@ -31,7 +31,7 @@ typedef struct {
          *last;
 } t_field;
 
-void printEntries();
+void InitPrintEntries();
 bool readEntries();
 void listAdd();
 void addEntry();
@@ -64,13 +64,12 @@ void mainRead() {
     else return;
   }
   else printf("\nEntries read. Printing %d entries...\n\n\n", entryAmount*10);    //TODO time measurement
-  printEntries(f, entryAmount);
+  InitPrintEntries(f, entryAmount);
   selectionMenu();
   return;
 }
 
 bool readEntries(t_field *f, int entryAmount) {
-  printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
   fp = fopen("card_data.txt", "a+");
   if(!fp) {
@@ -78,20 +77,8 @@ bool readEntries(t_field *f, int entryAmount) {
     return false;
   }
 
-  printf("#DEBUG Pointers created. Scanning file...\n");
   int entryCount = 1;
   char entry[72];
-  /*seekEntries(fp);
-  fgets(characterName, CHARACTER_NAME_LN, fp);
-  fseek(fp, CHARACTER_NAME_LN, SEEK_CUR);
-  fgets(cardName, CHARACTER_NAME_LN, fp);
-  fseek(fp, CARD_NAME_LN, SEEK_CUR);
-  fgets(cardType, CHARACTER_NAME_LN, fp);
-  fseek(fp, CARD_TYPE_LN, SEEK_CUR);
-  fgets(damageNumber, CHARACTER_NAME_LN, fp);
-  fseek(fp, DAMAGE_NUMBER_LN, SEEK_CUR);
-  fgets(afflictionType, CHARACTER_NAME_LN, fp);
-  fseek(fp, AFFLICTION_TYPE_LN, SEEK_CUR);*/
   fgets(entry, 72, fp);
   printf("\n%s", entry);
   while(!feof(fp)) {
@@ -101,26 +88,12 @@ bool readEntries(t_field *f, int entryAmount) {
     strncpy(f -> cardType, entry + CARD_NAME_LN, CARD_TYPE_LN);
     strncpy(f -> damageNumber, entry + CARD_TYPE_LN, DAMAGE_NUMBER_LN);
     strncpy(f -> afflictionType, entry + DAMAGE_NUMBER_LN, AFFLICTION_TYPE_LN);
-    /*strncpy(f -> characterName, entry, 10);
-    fseek(fp, strchr(entry, "/")+1, SEEK_CUR);
-    strncpy(f -> cardName, entry, strchr(entry, "/")+1);
-    fseek(fp, strchr(entry, "/")+1, SEEK_CUR);
-    strncpy(f -> cardType, entry, strchr(entry, "/")+1);
-    fseek(fp, strchr(entry, "/")+1, SEEK_CUR);
-    strncpy(f -> damageNumber, entry, strchr(entry, "/")+1);
-    fseek(fp, strchr(entry, "/")+1, SEEK_CUR);
-    char afflictionType[AFFLICTION_TYPE_LN];
-    strncpy(afflictionType, entry, strchr(entry, "/")+1);
-    if(afflictionType[0] == '0')   // check if the entered value is 0. If it's zero it should be replaced with "none"
-      strcpy(f -> afflictionType, "none");
-    else                                                                                // otherwise, read the entered value
-      strncpy(f -> afflictionType, afflictionType + AFFLICTION_TYPE_LN, CARD_TYPE_LN);*/
     listAdd(f);
     printf("\n%s", entry);
     fgets(entry, 72*entryCount, fp);
   }
   fclose(fp);
-  printf("#DEBUG Scanning completed. Found %d entries.\n", entryAmount*10);
+  printf("Reading completed. Found %d entries.\n", entryAmount*10);
   return true;
 }
 
@@ -144,13 +117,10 @@ void addEntry(t_field *f) {
   strcpy(f -> mom -> afflictionType, f -> afflictionType);
 }
 
-void printEntries(t_field *f, int entryAmount) {
+void InitPrintEntries(t_field *f, int entryAmount) {
   f -> mom = f -> start;
   for(int i = 0; i <= entryAmount; i++) {
-    if(f -> mom == 0) {
-      printf("#DEBUG End of entries. Terminating print loop.\n");
-      break;
-    }
+    if(f -> mom == 0) break;
     printf("Printing...\n");
     printf("%-10s %s %s %s %s\n",
       f -> mom -> characterName,

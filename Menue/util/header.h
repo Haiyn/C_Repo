@@ -23,13 +23,6 @@
 
 
 // STRUCTS
-struct card {
-  char characterName[CHARACTER_NAME_LN];
-  char cardName[NAME_LN];
-  char cardType[TYPE_LN];
-  char damageNumber[DAMAGE_NUMBER_LN];
-  char effectType[EFFECT_TYPE_LN];
-} card;
 
 
 typedef struct m_card {
@@ -64,7 +57,8 @@ void importEntries();
 
 // OUTPUT PROTOTYPES
 void viewEntries();
-void printEntries(t_field *f, int entrySelection, bool firstCall);
+void InitPrintEntries();
+void printEntries(t_field *f, int entrySelection);
 void selectionMenu();
 void viewHex();
 

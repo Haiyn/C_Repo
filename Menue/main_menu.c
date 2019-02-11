@@ -21,7 +21,6 @@ int main() {
 
   // Call main menu and validate input
   int selection = selectMainMenuAction();
-  if(!checkInputSelection(1, 7, selection)) selectMainMenuAction();
   system("clear");
   // run the selected sub-routine
   switch(selection) {

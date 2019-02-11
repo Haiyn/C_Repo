@@ -40,7 +40,7 @@ int selectMainMenuAction() {
   printf("Please enter a number: ");
   scanf("%d", &selection);
   fflush(stdin);
-  if(!checkInputSelection(1, 7, selection)) selectMainMenuAction();
+  if(!checkInputSelection(1, 9, selection)) selectMainMenuAction();
   return selection;
 }
 
@@ -81,11 +81,11 @@ int selectSortColumn() {
   printf("\n  [2] Card Name");
   printf("\n  [3] Card Type");
   printf("\n  [4] Damage Number");
-  printf("\n  [4] Effect Type");
-  printf("\n  [5] Exit");
+  printf("\n  [5] Effect Type");
+  printf("\n  [6] Exit");
   printf("\n\nPlease enter a number: ");
   scanf("%d", &column);
-  if(!checkInputSelection(1, 5, column))  selectSortColumn();
+  if(!checkInputSelection(1, 6, column))  selectSortColumn();
   return column;
 }
 
@@ -108,11 +108,11 @@ int selectEditColumn() {
   printf("\n  [2] Card Name");
   printf("\n  [3] Card Type");
   printf("\n  [4] Damage Number");
-  printf("\n  [4] Effect Type");
-  printf("\n  [5] Exit");
+  printf("\n  [5] Effect Type");
+  printf("\n  [6] Exit");
   printf("\n\nPlease enter a number: ");
   scanf("%d", &selection);
-  if(!checkInputSelection(1, 5, selection)) selectSortDirection();
+  if(!checkInputSelection(1, 6, selection)) selectSortDirection();
   return selection;
 }
 

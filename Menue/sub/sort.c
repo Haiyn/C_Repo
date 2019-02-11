@@ -9,15 +9,13 @@ void sortEntries(t_field *f) {
   if(direction == 3) return;
   bubblesort(f, column, direction, entryCount);
   system("clear");
-  printEntries(f, 4, false);
+  InitPrintEntries(f, 4);
 }
 
 void bubblesort(t_field *f, int column, int direction, int entryCount) {
-  printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();
   f -> mom = f->  first;
   for (int i = 0; i < entryCount - 1; i++) {
-    printf(".");
     for (int j = 0; j < entryCount - 1; j++) {
       switch(column) {
         case 1:   // Character Name
@@ -46,7 +44,7 @@ void bubblesort(t_field *f, int column, int direction, int entryCount) {
           } else if(strcmp(f -> mom -> effectType, f-> mom -> after -> effectType) > 0) switchEntries(f);
           break;
         default:
-          printf("\n\n###ERR Column seletion failed.");
+          printf("\n\n###ERR at sort.c: Column seletion failed.");
           waitForExit();
           return;
       }
@@ -55,8 +53,8 @@ void bubblesort(t_field *f, int column, int direction, int entryCount) {
     f -> mom = f -> first;
   }
   clock_t endTime = clock();
-  printf("\n#DEBUG Sorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
-  printEntries(f, 4, false);
+  printf("\nSorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
+  InitPrintEntries(f, 4);
 
   printf("Would you like to sort again? [y/n] ");
   if(userQuery()) sortEntries(f);

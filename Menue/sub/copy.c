@@ -1,32 +1,33 @@
 #include "../util/header.h"
 
 void copyEntries(t_field *f) {
-  int i, entryIndex, column, entryCount;
+  int i = 0, column, entryCount;
+  int entry;
   entryCount = loadEntries(f, 4);
-  printEntries(f, 4, true);
+  InitPrintEntries(f, 4);
   printf("\nWhich entry would you like to copy? Please enter a number: ");
-  scanf("%d", &entryIndex);
-  fflush(stdin);
-  if(!checkInputSelection(1, entryCount, entryIndex)) waitForExit();
-
+  scanf("%d", &entry);
+  if(!checkInputSelection(1, entryCount, entry)) waitForExit();
   f -> mom = f -> first;
-  while(i < entryIndex - 1) {
+  while(i < entry - 1) {
     f -> mom = f -> mom -> after;
+    i++;
   }
   strcpy(f -> characterName, f -> mom -> characterName);
   strcpy(f -> cardName, f -> mom -> cardName);
   strcpy(f -> cardType, f -> mom -> cardType);
   strcpy(f -> damageNumber, f -> mom -> damageNumber);
   strcpy(f -> effectType, f -> mom -> effectType);
-  printf("\nYou selected:\t%-20s  %-20s  %-15s  %-10s  %-20s",
+  printf("\n\nYou selected:\t%-20s  %-20s  %-15s  %-10s  %-20s",
               f -> characterName,
               f -> cardName,
               f -> cardType,
               f -> damageNumber,
               f -> effectType);
-  printf("\nWould you like to edit the entry before duplicating it? [y/n] ");
+  printf("\n\nWould you like to edit the entry before duplicating it? [y/n] ");
   if(userQuery()) editEntry(f);
   else addData(f);
+  waitForExit();
 }
 
 void editEntry(t_field *f) {
@@ -55,6 +56,7 @@ void editEntry(t_field *f) {
     case 6:
       return;
   }
-  addData(f);
-  printf("Entry edited and added to save file.");
+  printf("\nWould you like to edit another column before duplicating it? [y/n] ");
+  if(userQuery()) editEntry(f);
+  else addData(f);
 }

@@ -7,21 +7,14 @@ void viewEntries(t_field *f) {
   f -> mom = f -> first;
   if(!f -> mom) entryCount = loadEntries(f, entryAmount);
   else printf("\nEntries loaded. Found %d entries.\n\n\n", entryCount);    //TODO time measurement
-  printEntries(f, entryAmount, true);
+  InitPrintEntries(f, entryAmount);
   selectionMenu(f, entryAmount);
   return;
 }
 
 void viewHex(t_field *f) {
-  // If the struct ist empty, load all entries (4) to the struct from text file
-  if(!f -> mom) {
-    bool readSuccess = loadEntries(f, 4);
-    if(!readSuccess) {
-      printf("\n###ERR Reading process failed at load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
-      if(userQuery()) viewHex(f);
-      else return;
-    }
-  }
+    int entryCount = loadEntries(f, 4);
+
   int i = 1;
   f -> mom = f -> first;
   printSeparator('-', 143, false);
@@ -51,6 +44,7 @@ void viewHex(t_field *f) {
     i++;
   }
   printSeparator('-', 143, false);
+  printf("\nEntries loaded. Found %d entries.\n\n\n", entryCount);
   // Keep the menu open until user confirms exit
   waitForExit();
   return;
@@ -69,7 +63,7 @@ void selectionMenu(t_field *f, int entryAmount) {
   switch(selection) {
     case 1: // SHOW NEXT 10 ENTRIES
       system("clear");
-      printEntries(f, 1, false);
+      printEntries(f, 1);
       selectionMenu(f, entryAmount);
       break;
     case 2:
