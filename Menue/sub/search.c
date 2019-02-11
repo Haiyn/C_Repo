@@ -2,7 +2,7 @@
 
 void searchEntries(t_field *f) {
   system("clear");
-  int foundEntries = 0;
+  int entryCount, foundEntries = 0;
   char keyword[30], pointerArray[5][30];
 
   printf("\nEnter 'e' to abort and exit the sub-routine.\n");
@@ -12,7 +12,7 @@ void searchEntries(t_field *f) {
   if (keyword[0] == 'e') return;
 
   clock_t startTime = clock();
-  loadEntries(f, 4);
+  entryCount = loadEntries(f, 4);
   f -> mom = f -> first;
 
   for(int i = 0; i < entryCount; i++) {

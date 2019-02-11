@@ -21,8 +21,6 @@
 #define EFFECT_TYPE_LN 30
 #define ENTRY_LN 112           // Length of all struct vars + 2 for \n at the end of line
 
-// GLOBAL AVAILABLE PROPERTIES
-int entryCount;
 
 // STRUCTS
 struct card {
@@ -71,7 +69,7 @@ void selectionMenu();
 void viewHex();
 
 // DATA FUNCTIONS PROTOTYPES
-bool loadEntries();
+int loadEntries();
 void listAdd();
 void addEntry();
 void readImportFile();

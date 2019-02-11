@@ -3,18 +3,18 @@
 void deleteEntries(t_field *f) {
     bool success = false;
     // load data from txt and print all existing entries
-    loadEntries(f, 4);
+    int entryCount = loadEntries(f, 4);
     printEntries(f, 4, true);
 
     // Flag and delete entered entry range
-    success = flagEntry(f);
+    success = flagEntry(f, entryCount);
     if(!success) printf("\n\n###ERR Error deleting entry.");
     else printf("\n\nDeleted successfully.");
     waitForExit();
     return;
 }
 
-bool flagEntry(t_field *f) {
+bool flagEntry(t_field *f, int entryCount) {
   int deleteFlagFrom, deleteFlagTo, i = 0;
   bool exists;
 
@@ -37,12 +37,12 @@ bool flagEntry(t_field *f) {
     }
   }
   exists = true;
-  deleteFlaggedEntry(f, deleteFlagTo, deleteFlagFrom);
+  deleteFlaggedEntry(f, deleteFlagTo, deleteFlagFrom, entryCount);
   return true;
 }
 
 
-void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom) {
+void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom, int entryCount) {
   //f -> mom = f -> first;
   for(int i = 0; i <= deleteFlagTo - deleteFlagFrom; i++) {
     if(f -> mom -> after && f -> mom -> before) {      // Middle entry

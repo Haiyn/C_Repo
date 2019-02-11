@@ -3,8 +3,8 @@
 // DATA LOADING
 
 // Reads the entries from the txt file and loads them into the struct
-bool loadEntries(t_field *f, int entryAmount) {
-  entryCount = 0;
+int loadEntries(t_field *f, int entryAmount) {
+  int entryCount = 0;
   printf("#DEBUG Read process started. Creating pointers...\n");
   FILE *fp;
   fp = fopen("./data/data.txt", "a+");
@@ -21,7 +21,7 @@ bool loadEntries(t_field *f, int entryAmount) {
   }
   fclose(fp);
   printf("#DEBUG Scanning completed. Loaded %d entries.\n", entryCount);
-  return true;
+  return entryCount;
 }
 
 // reserves memory and adds to the struct

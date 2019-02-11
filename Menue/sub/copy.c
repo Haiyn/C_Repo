@@ -1,8 +1,8 @@
 #include "../util/header.h"
 
 void copyEntries(t_field *f) {
-  int i, entryIndex, column;
-  loadEntries(f, 4);
+  int i, entryIndex, column, entryCount;
+  entryCount = loadEntries(f, 4);
   printEntries(f, 4, true);
   printf("\nWhich entry would you like to copy? Please enter a number: ");
   scanf("%d", &entryIndex);

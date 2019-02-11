@@ -1,17 +1,18 @@
 #include "../util/header.h"
 
 void sortEntries(t_field *f) {
-  int column, direction;
+  int column, direction, entryCount;
+  entryCount = loadEntries(f, 4);
   column = selectSortColumn();
   if(column == 5) return;
   direction = selectSortDirection();
   if(direction == 3) return;
-  bubblesort(f, column, direction);
+  bubblesort(f, column, direction, entryCount);
   system("clear");
   printEntries(f, 4, false);
 }
 
-void bubblesort(t_field *f, int column, int direction) {
+void bubblesort(t_field *f, int column, int direction, int entryCount) {
   printf("\n#DEBUG Bubblesort in progress.");
   clock_t startTime = clock();
   f -> mom = f->  first;

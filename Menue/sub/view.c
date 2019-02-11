@@ -1,20 +1,12 @@
 #include "../util/header.h"
 
 void viewEntries(t_field *f) {
-  int entryAmount = selectEntryAmount();
+  int entryCount, entryAmount = selectEntryAmount();
   system("clear");
   if(entryAmount == 5) return;
   f -> mom = f -> first;
-  if(!f -> mom) {
-    bool readSuccess = loadEntries(f, entryAmount);
-    if(!readSuccess) {
-      printf("\n###ERR Reading process failed at load.c \nWould you like to retry? Enter 0 for no, 1 for yess: ");
-      if(userQuery()) viewEntries(f);
-      else return;
-    }
-  }
-
-  else printf("\n#DEBUG Entries read. Printing %d entries...\n\n\n", entryAmount*10);    //TODO time measurement
+  if(!f -> mom) entryCount = loadEntries(f, entryAmount);
+  else printf("\nEntries loaded. Found %d entries.\n\n\n", entryCount);    //TODO time measurement
   printEntries(f, entryAmount, true);
   selectionMenu(f, entryAmount);
   return;
