@@ -1,5 +1,4 @@
 Ironclad/Rupture/Power/0/Card
-Ironclad/Perfected Strike/Attack/Xx6/none
 Ironclad/Strike/Attack/6/none
 Silent/Envenom/Power/0/Poison
 Defect/Frost/Skill/0/Block
@@ -25,3 +24,6 @@ Ironclad/Seeing Red/Skill/0/Energy & Exhaust
 Silent/Blade Dance/Skill/0/Shivs
 Defect/Zap/Skill/0/Lightning
 Defect/All For One/Attack/10/Draw
+All/Master of Strategy/Skill/0/Draw
+All/Void/Status/0/Exhaust
+All/Decay/Curse/0/Exhaust

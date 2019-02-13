@@ -31,6 +31,12 @@ void copyEntries(t_field *f) {
   printf("\n\nWould you like to edit the entry before duplicating it? [y/n] ");
   if(userQuery()) editEntry(f);
   else addData(f);
+  printf("\nEntry added:\t%-20s  %-20s  %-15s  %-10s  %-20s",
+              f -> characterName,
+              f -> cardName,
+              f -> cardType,
+              f -> damageNumber,
+              f -> effectType);
   waitForExit();
 }
 
