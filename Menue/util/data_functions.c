@@ -92,7 +92,7 @@ void addData(t_field *f) {
   fclose(fp);
 }
 
-// Replace the txt file with the whole struct (after deleting an entry)
+// Replace the txt file with the whole struct (after deleting or sorting)
 void ReplaceData(t_field *f) {
   FILE *fp;
   fp = fopen("./data/data.txt", "w");
@@ -118,8 +118,8 @@ void resetImportFile() {
     waitForExit();
     return;
   }
-  fprintf(fp, "*** IMPORT FILE\n***\n*** This is the import file. Enter sets of data in the following format to import them:\n");
-  fprintf(fp, "*** [Character Name]/[Card Name]/[Card Type]/[Damage Number]/[Effects]\n*** Replace [...] with the corresponding value.\n***\n");
-  fprintf(fp, "*** This is a comment line, it will be ignored during the import process.\n***\n***\n***----------------------------------------------\n");
+  fprintf(fp, "### IMPORT FILE\n###\n### This is the import file. Enter sets of data in the following format to import them:\n");
+  fprintf(fp, "### [Character Name]/[Card Name]/[Card Type]/[Damage Number]/[Effects]\n### Replace [...] with the corresponding value.\n###\n");
+  fprintf(fp, "### This is a comment line, it will be ignored during the import process.\n###\n###----------------------------------------------\n");
   fclose(fp);
 }

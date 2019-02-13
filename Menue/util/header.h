@@ -23,8 +23,6 @@
 
 
 // STRUCTS
-
-
 typedef struct m_card {
   char characterName[CHARACTER_NAME_LN];
   char cardName[NAME_LN];
@@ -49,20 +47,44 @@ typedef struct {
 } t_field;
 
 
-
-// CARD INPUT PROTOTYPES
+// PROTOTYPES
+// ADD
 void inputEntries();
 bool readInputData();
-void importEntries();
 
-// OUTPUT PROTOTYPES
+// IMPORT
+void importEntries();
+int scanImportFile();
+
+// VIEW
 void viewEntries();
 void InitPrintEntries();
-void printEntries(t_field *f, int entrySelection);
+void printEntries();
 void selectionMenu();
 void viewHex();
 
-// DATA FUNCTIONS PROTOTYPES
+// SEARCH
+void searchEntries();
+void printHeader();
+void printFooter();
+
+// DELETE
+void mainDelete(t_field *f);
+bool flagEntry();
+void deleteFlaggedEntry();
+
+// SORT
+void bubblesort();
+void checkDirection();
+void switchEntries();
+
+// FUNCTIONS
+bool checkInputSelection();
+void waitForExit();
+bool checkInput();
+bool userQuery();
+
+// DATA FUNCTIONS
 int loadEntries();
 void listAdd();
 void addEntry();
@@ -75,28 +97,7 @@ void addData();
 void copyEntries();
 void editEntry();
 
-// CARD SEARCH PROTOTYPES
-void searchEntries();
-void printHeader();
-void printFooter();
-
-// CARD DELETE PROTOTYPES
-void mainDelete(t_field *f);
-bool flagEntry();
-void deleteFlaggedEntry();
-
-// SORT PROTOTYPES
-void bubblesort();
-void checkDirection();
-void switchEntries();
-
-// FUNCTIONS PROTOTYPES
-bool checkInputSelection();
-void waitForExit();
-bool checkInput();
-bool userQuery();
-
-// UI PROTOTYPES
+// UI
 int selectMainMenuAction();
 int selectEntryAmount();
 int selectProceedAction();

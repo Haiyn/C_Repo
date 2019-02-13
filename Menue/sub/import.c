@@ -1,6 +1,7 @@
 #include "../util/header.h"
 
 void importEntries(t_field *f) {
+  system("clear");
   FILE *fp;
   char path[80];
   int selection, addedEntries;
@@ -19,29 +20,38 @@ void importEntries(t_field *f) {
     default:
       return;
   }
+
   if(!validateFile(fp, "readImportFile")) {
     printf("Would you like to retry? [y/n]\n");
     if(userQuery()) importEntries(f);
     else return;
   }
+
+  addedEntries = scanImportFile(fp, f);
+  fclose(fp);
+  printf("\nFile scanning finished. Imported %d entry(s).", addedEntries);
+
+  if(selection == 1) resetImportFile();    // reformats the import.txt
+  printf("\nWould you like to import another file? [y/n] ");
+  if(userQuery()) importEntries(f);
+}
+
+int scanImportFile(FILE *fp, t_field *f) {
+  int addedEntries = 0;
   while(!feof(fp)) {
-    char firstChar = fgetc(fp);
-    if(firstChar == '*') {
-      while(fgetc(fp) != '\n') {
-        if(feof(fp)) break;
-        fseek(fp, 1, SEEK_CUR);
-      }
-    }
-    else  {
-      ungetc(firstChar, fp);
-      fscanf(fp, "%[^/]/%[^/]/%[^/]/%[^/]/%[^\n]\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
-      listAdd(f);   // adds the read entry to the struct
-      addData(f);   // writes the entry to data.txt
+    char line[400];
+    fscanf(fp, "%[^\n]\n", line);
+    // if line does not start with "###", split the char array into tokens
+    if(!(line[0] == '#' && line[1] == '#' && line[2] == '#')) {
+      strcpy(f -> characterName, strtok(line, "/"));
+      strcpy(f -> cardName, strtok(NULL, "/"));
+      strcpy(f -> cardType, strtok(NULL, "/"));
+      strcpy(f -> damageNumber, strtok(NULL, "/"));
+      strcpy(f -> effectType, strtok(NULL, "\n"));
+      listAdd(f); // add the saved tokens to the struct
+      addData(f); // write the new struct entry to data.txt
       addedEntries++;
     }
   }
-  fclose(fp);
-  printf("\nFile scanning finished. Imported %d entry(s).", addedEntries);
-  if(selection == 1) resetImportFile();    // reformats the import.txt
-  waitForExit();
+  return addedEntries;
 }
