@@ -51,21 +51,3 @@ bool validateFile(FILE *fp, char functionName[30]) {
   }
   return true;
 }
-
-
-// STRING MANIPULATION
-// Prases a string input that's seperated by commas into an int array (returned as a pointer)
-int* parseSeperatedInput(char str[]) {
-  static int array[5];
-  int i = 0;
-  char *pt;
-
-
-  pt = strtok (str, ",");
-  while (pt != NULL) {
-      array[i] = atoi(pt);
-      pt = strtok (NULL, ",");
-      i++;
-  }
-  return array;
-}

@@ -8,11 +8,8 @@ void inputEntries(t_field *f) {
   if(aborted) return;                   // if the action was aborted, return to the main menu
   addData(f);
 
-  printf("Would you like to add another entry? [y/n] ");
-  if(userQuery())  {
-    //memset(&card, 0, sizeof(card));     // reset the memory of the struct to avoid false data from previous input
-    inputEntries(f);
-  }
+  printf("\nWould you like to add another entry? [y/n] ");
+  if(userQuery())  inputEntries(f);
 }
 
 // Read data from user input
