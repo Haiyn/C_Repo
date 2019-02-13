@@ -1,5 +1,6 @@
 #include "../util/header.h"
 
+// lets the user search for a specific keyword
 void searchEntries(t_field *f) {
   system("clear");
   int entryCount, foundEntries = 0;
@@ -43,6 +44,7 @@ void searchEntries(t_field *f) {
   if(userQuery()) searchEntries(f);
 }
 
+// prints the entry structure header
 void printHeader() {
     printf("\nFound following entry(s):\n\n");
     printSeparator('-', 107, false);
@@ -56,6 +58,7 @@ void printHeader() {
     printSeparator('-', 105, true);
 }
 
+// prints the information after all entries were found
 void printFooter(int foundEntries, int startTime) {
   clock_t endTime = clock();
   if(foundEntries == 0) printf("\nCouldn't find any entries for that keyword.");

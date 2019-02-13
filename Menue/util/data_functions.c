@@ -18,7 +18,7 @@ int loadEntries(t_field *f, int entryAmount) {
     entryCount++;
   }
   fclose(fp);
-  printf("Reading completed. Loaded %d entries.\n", entryCount);
+  printf("\nLoading completed. Loaded %d entries.\n", entryCount);
   return entryCount;
 }
 
@@ -41,6 +41,7 @@ void addEntry(t_field *f) {
   strcpy(f -> mom -> damageNumber, f -> damageNumber);
   strcpy(f -> mom -> effectType, f -> effectType);
 }
+
 
 // DATA OUTPUT
 

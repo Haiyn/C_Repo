@@ -1,5 +1,6 @@
 #include "../util/header.h"
 
+// lets the user select the file to import
 void importEntries(t_field *f) {
   system("clear");
   FILE *fp;
@@ -36,6 +37,7 @@ void importEntries(t_field *f) {
   if(userQuery()) importEntries(f);
 }
 
+// scans the selected file for any entrys and ignores comment lines
 int scanImportFile(FILE *fp, t_field *f) {
   int addedEntries = 0;
   while(!feof(fp)) {

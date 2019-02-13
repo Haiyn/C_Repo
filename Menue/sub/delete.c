@@ -1,5 +1,6 @@
 #include "../util/header.h"
 
+// calls all methods needed for deleting
 void deleteEntries(t_field *f) {
     bool success = false;
     // load data from txt and print all existing entries
@@ -14,6 +15,7 @@ void deleteEntries(t_field *f) {
     return;
 }
 
+// let the user decide which entry(s) to delete
 bool flagEntry(t_field *f, int entryCount) {
   int deleteFlagFrom, deleteFlagTo, i = 0;
   bool exists;
@@ -40,7 +42,7 @@ bool flagEntry(t_field *f, int entryCount) {
   return true;
 }
 
-
+// deletes the entry(s) the user chose
 void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom, int entryCount) {
   //f -> mom = f -> first;
   for(int i = 0; i <= deleteFlagTo - deleteFlagFrom; i++) {
@@ -48,18 +50,14 @@ void deleteFlaggedEntry(t_field *f, int deleteFlagTo, int deleteFlagFrom, int en
       f -> mom -> before -> after = f -> mom -> after;
       f -> mom -> after -> before = f -> mom -> before;
       free(f -> mom);
-      // set current pointer to first to avoid a NullPointerException
-      //f -> mom = f -> first;
     } else if(f -> mom -> before) {      // last entry
       f -> mom -> before -> after = 0;
       f -> last = f -> mom -> before;
       free(f -> mom);
-      //f -> mom = f -> first;
     } else if(f -> mom -> after) {      // first entry
       f -> mom -> after -> before = 0;
       f -> first = f -> mom -> after;
       free(f -> mom);
-      //f -> mom = f -> first;
     } else {                            // only entry
       free(f -> mom);
     }

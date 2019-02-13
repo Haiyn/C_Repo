@@ -1,17 +1,22 @@
 #include "../util/header.h"
 
+// let's the user pick the sorting options
 void sortEntries(t_field *f) {
   int column, direction, entryCount;
   entryCount = loadEntries(f, 4);
+
   column = selectSortColumn();
   if(column == 5) return;
+
   direction = selectSortDirection();
   if(direction == 3) return;
+
   bubblesort(f, column, direction, entryCount);
   system("clear");
   InitPrintEntries(f, 4);
 }
 
+// sorts by corresponding column and direction (ascending/descending)
 void bubblesort(t_field *f, int column, int direction, int entryCount) {
   clock_t startTime = clock();
   f -> mom = f->  first;
@@ -53,6 +58,7 @@ void bubblesort(t_field *f, int column, int direction, int entryCount) {
     f -> mom = f -> first;
   }
   clock_t endTime = clock();
+
   printf("\nSorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
   InitPrintEntries(f, 4);
 
@@ -63,6 +69,8 @@ void bubblesort(t_field *f, int column, int direction, int entryCount) {
   return;
 }
 
+
+// switches the values of two entries
 void switchEntries(t_field *f) {
   char cache[30];
   strcpy(cache, f -> mom -> characterName);

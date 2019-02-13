@@ -1,9 +1,11 @@
 #include "../util/header.h"
 
+// shows a selected amount of entries
 void viewEntries(t_field *f) {
   int entryCount, entryAmount = selectEntryAmount();
   system("clear");
   if(entryAmount == 5) return;
+
   f -> mom = f -> first;
   if(!f -> mom) entryCount = loadEntries(f, entryAmount);
   else printf("\nEntries loaded. Found %d entries.\n\n\n", entryCount);    //TODO time measurement
@@ -12,11 +14,13 @@ void viewEntries(t_field *f) {
   return;
 }
 
-void viewHex(t_field *f) {
-    int entryCount = loadEntries(f, 4);
 
+// shows all entries and their pointers
+void viewHex(t_field *f) {
+  int entryCount = loadEntries(f, 4);
   int i = 1;
   f -> mom = f -> first;
+
   printSeparator('-', 143, false);
   printf("| %-4s %-12s | %-20s | %-10s | %-10s | %-20s | %-15s %-15s %-15s |\n",
                 "Nr.",
@@ -44,6 +48,7 @@ void viewHex(t_field *f) {
     i++;
   }
   printSeparator('-', 143, false);
+
   printf("\nEntries loaded. Found %d entries.\n\n\n", entryCount);
   // Keep the menu open until user confirms exit
   waitForExit();
@@ -52,12 +57,10 @@ void viewHex(t_field *f) {
 
 
 
-
 // UI HANDLER
-
+// handles the proceed action
 void selectionMenu(t_field *f, int entryAmount) {
   int selection, column, direction;
-
   // Show the options the user has to proceed and return the choice
   selection = selectProceedAction();
   switch(selection) {

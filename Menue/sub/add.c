@@ -1,7 +1,6 @@
 #include "../util/header.h"
 
 // DATA READING (USER INPUT)
-
 void inputEntries(t_field *f) {
   system("clear");
   bool aborted = readInputData(f);
@@ -46,6 +45,3 @@ bool readInputData(t_field *f) {
   if(f -> effectType[0] == 'e') return true;
   return false;
 }
-
-
-// INPUT FROM IMPORT FILE
