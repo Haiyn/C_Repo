@@ -56,7 +56,9 @@ void bubblesort(t_field *f, int column, int direction, int entryCount) {
   printf("\nSorting finished successfully after %.4f seconds.\n\n", (double)(endTime - startTime)/1000);
   InitPrintEntries(f, 4);
 
-  printf("Would you like to sort again? [y/n] ");
+  printf("\nWould you like to save this sorted list? [y/n]");
+  if(userQuery()) ReplaceData(f);
+  printf("\nWould you like to sort again? [y/n] ");
   if(userQuery()) sortEntries(f);
   return;
 }
