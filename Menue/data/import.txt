@@ -1,10 +1,16 @@
-*** IMPORT FILE
-***
-*** This is the import file. Enter sets of data in the following format to import them:
-*** [Character Name]/[Card Name]/[Card Type]/[Damage Number]/[Effects]
-*** Replace [...] with the corresponding value.
-***
-*** This is a comment line, it will be ignored during the import process.
-***
-***
-***----------------------------------------------
+### IMPORT FILE
+###
+### This is the import file. Enter sets of data in the following format to import them:
+### [Character Name]/[Card Name]/[Card Type]/[Damage Number]/[Effects]
+### Replace [...] with the corresponding value.
+###
+### This is a comment line, it will be ignored during the import process.
+###
+###----------------------------------------------
+Ironclad/Exhume/Skill/0/Draw
+Defect/Turbo/Skill/0/Energy & Curse
+Ironclad/Body Slam/Attack/X/none
+All/J.A.X./Skill/0/Strength & Damage
+All/Bandage Up/Skill/0/Healing
+Silent/Dagger Throw/Attack/9/Draw & Discard
+Ironclad/Iron Wave/Attack/5/Block

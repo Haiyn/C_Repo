@@ -6,8 +6,6 @@ Defect/Frost/Skill/0/Block
 Defect/Echo Form/Power/0/Double Play
 Defect/Strike/Attack/6/none
 Silent/Strike/Attack/6/none
-Defect/Strike/Attack/6/none
-Silent/Strike/Attack/6/none
 Ironclad/Bash/Attack/8/Vulnerable
 Ironclad/Entrench/Skill/0/Block
 Ironclad/Panic Button/Skill/0/Block
@@ -15,3 +13,15 @@ All/Dazed/Status/0/Exhaust
 Defect/Electrodynamics/Power/0/Lightning
 All/Burn/Status/0/Exhaust
 All/Slime/Status/0/Exhaust on Play
+Ironclad/Flame Barrier/Skill/0/Block & Thorns
+Ironclad/True Grit/Skill/0/Block & Exhaust
+Defect/Rebound/Attack/6/Draw
+Silent/Cloak and Dagger/Skill/0/Block & Shivs
+Silent/Shiv/Attack/4/Exhaust
+Defect/Rainbow/Skill/0/Channel Orbs
+Ironclad/Pommel Strike/Attack/6x2/Exhaust
+Ironclad/Trip/Skill/0/Vulnerable
+Ironclad/Seeing Red/Skill/0/Energy & Exhaust
+Silent/Blade Dance/Skill/0/Shivs
+Defect/Zap/Skill/0/Lightning
+Defect/All For One/Attack/10/Draw
