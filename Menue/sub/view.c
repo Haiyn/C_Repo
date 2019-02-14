@@ -69,7 +69,7 @@ void selectionMenu(t_field *f, int entryAmount) {
       printEntries(f, 1);
       selectionMenu(f, entryAmount);
       break;
-    case 2:
+    case 2: // EXIT TO MAIN MENU
       system("clear");
       return;
     default:

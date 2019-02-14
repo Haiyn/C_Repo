@@ -1,7 +1,7 @@
 #include "header.h"
 
 // USER INPUT CHECKS
-// Checks whether the input number is greater or smaller than the possible selections in a selection menu
+// Checks whether the input number is greater or smaller than the possible selections in a selection menu. Returns true if user input is in bounds.
 bool checkInputSelection(int lowerBoundary, int upperBoundary, int input) {
   if(input < lowerBoundary || input > upperBoundary) {
     printf("\nSorry, that input isn't valid!\n");
@@ -20,7 +20,7 @@ void waitForExit() {
   return;
 }
 
-// Asks the user if he wants to run the sub-routine again. Return
+// Asks the user if he wants to run the sub-routine again. Returns true if user selected "yes".
 bool userQuery() {
   char retrySelection[1];
   scanf(" %[^\n]", retrySelection);
@@ -44,6 +44,7 @@ void printSeparator(char separator, int amount, bool border) {
 
 
 // FILE VALIDATION
+// checks if the file exists. Returns false if not, returns true if found.
 bool validateFile(FILE *fp, char functionName[30]) {
   if(!fp) {
     printf("\n###ERR at %s: Could not find file.", functionName);

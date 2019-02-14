@@ -6,13 +6,14 @@ void importEntries(t_field *f) {
   FILE *fp;
   char path[80];
   int selection, addedEntries;
+  
   selection = selectImportFile();
   switch(selection) {
     case 1:
       fp = fopen("./data/import.txt", "r");
       break;
     case 2:
-      printf("\nPlease enter the file path (relative to load.c): ");
+      printf("\nPlease enter the file path (relative to import.c): ");
       scanf(" %s", path);
       fp = fopen(path, "r");
       break;

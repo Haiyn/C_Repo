@@ -6,7 +6,7 @@ void sortEntries(t_field *f) {
   entryCount = loadEntries(f, 4);
 
   column = selectSortColumn();
-  if(column == 5) return;
+  if(column == 6) return;
 
   direction = selectSortDirection();
   if(direction == 3) return;

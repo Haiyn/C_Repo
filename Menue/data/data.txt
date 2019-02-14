@@ -10,8 +10,6 @@ Ironclad/Entrench/Skill/0/Block
 Ironclad/Panic Button/Skill/0/Block
 All/Dazed/Status/0/Exhaust
 Defect/Electrodynamics/Power/0/Lightning
-All/Burn/Status/0/Exhaust
-All/Slime/Status/0/Exhaust on Play
 Ironclad/Flame Barrier/Skill/0/Block & Thorns
 Ironclad/True Grit/Skill/0/Block & Exhaust
 Defect/Rebound/Attack/6/Draw

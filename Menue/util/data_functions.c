@@ -83,7 +83,7 @@ void printEntries(t_field *f, int entryAmount) {
 // Add a new entry at the end of the file
 void addData(t_field *f) {
   FILE *fp;
-  fp = fopen("./data/data.txt", "a+");      // a+ opens the file appended (pointer moves to eof)
+  fp = fopen("./data/data.txt", "a+");      // a+ opens the file appended (pointer moves to end)
   if(!validateFile(fp, "addData")) {
     waitForExit();
     return;
@@ -92,6 +92,7 @@ void addData(t_field *f) {
   fprintf(fp, "%s/%s/%s/%s/%s\n", f -> characterName, f -> cardName, f -> cardType, f -> damageNumber, f -> effectType);
   fclose(fp);
 }
+
 
 // Replace the txt file with the whole struct (after deleting or sorting)
 void ReplaceData(t_field *f) {
